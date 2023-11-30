@@ -32,7 +32,7 @@ class FirebaseFirestoreController {
       FlushbarExtension.oneMessageFlushbar(context, "Gönderi silindi");
     })
         .catchError((error) {
-      FlushbarExtension.oneMessageErrorFlushbar(context, "Gönderi paylaşılamadı");
+      FlushbarExtension.oneMessageErrorFlushbar(context, "Gönderi silinemedi");
     });
 
   }
@@ -49,6 +49,33 @@ class FirebaseFirestoreController {
       'eventimageurl': imageUrl,
       'timestamp': Timestamp.fromDate(eventDate),
     },);
+
+  }
+
+  static Future<String> getUserRole(String uid) async {
+    try {
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+
+      if (documentSnapshot.exists) {
+        String userRole = documentSnapshot['role'];
+        return userRole;
+      } else {
+        return "Uye";
+      }
+    } catch (e) {
+      return "Uye";
+    }
+  }
+
+  static firestoreDeleteEvent(BuildContext context, String documentId){
+
+    FirebaseFirestore.instance.collection('events').doc(documentId).delete()
+        .then((value) {
+
+    })
+        .catchError((error) {
+      if(context.mounted) FlushbarExtension.oneMessageFlushbar(context, "Etkinlik silindi");
+    });
 
   }
 

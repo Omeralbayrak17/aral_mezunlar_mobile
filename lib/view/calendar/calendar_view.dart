@@ -1,6 +1,9 @@
+import 'package:aral_mezunlar_mobile/controller/firebase_firestore_controller.dart';
 import 'package:aral_mezunlar_mobile/controller/firebase_storage_controller.dart';
+import 'package:aral_mezunlar_mobile/extension/popup_extension.dart';
 import 'package:aral_mezunlar_mobile/view/calendar_details/calendar_details_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -99,6 +102,12 @@ class _CalendarViewState extends State<CalendarView> {
                                         return InkWell(
                                           splashColor: Colors.white,
                                           highlightColor: Colors.white,
+                                          onLongPress: () async {
+                                            String userRole = await FirebaseFirestoreController.getUserRole(FirebaseAuth.instance.currentUser!.uid);
+                                            if(userRole == "Yönetim"){
+                                              if(context.mounted) PopUpExtension.showEventDeleteConfirmationDialog(context, upcomingEvents[index].id);
+                                            }
+                                          },
                                           onTap: () {
                                             Navigator.push(
                                               context,
@@ -184,6 +193,12 @@ class _CalendarViewState extends State<CalendarView> {
                                         return InkWell(
                                           splashColor: Colors.white,
                                           highlightColor: Colors.white,
+                                          onLongPress: () async {
+                                            String userRole = await FirebaseFirestoreController.getUserRole(FirebaseAuth.instance.currentUser!.uid);
+                                            if(userRole == "Yönetim"){
+                                              if(context.mounted) PopUpExtension.showEventDeleteConfirmationDialog(context, pastEvents[index].id);
+                                            }
+                                          },
                                           onTap: () {
                                             Navigator.push(
                                               context,
