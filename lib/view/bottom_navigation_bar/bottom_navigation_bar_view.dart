@@ -69,6 +69,7 @@ class _BottomNavigationBarView extends State<BottomNavigationBarView> {
       builder: (context, child){
         return SafeArea(
           child: Scaffold(
+            resizeToAvoidBottomInset: true,
             appBar: AppBar(
               title: const Text("Aral Mezunlar Mobile"),
               elevation: 3,

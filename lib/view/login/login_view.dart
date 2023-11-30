@@ -1,4 +1,5 @@
 import 'package:aral_mezunlar_mobile/constant/color_constants.dart';
+import 'package:aral_mezunlar_mobile/extension/popup_extension.dart';
 import 'package:aral_mezunlar_mobile/view/bottom_navigation_bar/bottom_navigation_bar_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -222,11 +223,16 @@ class _LoginViewState extends State<LoginView> {
                             ),
                             _passwordEntryField("Şifrenizi girin", _controllerPassword),
                             SizedBox(
-                              height: 25.h,
+                              height: 5.h,
                             ),
-
-                            SizedBox(
-                              height: 25.h,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                TextButton(
+                                  onPressed: (){PopUpExtension.showForgetPasswordDialog(context);},
+                                  child: const Text("Şifremi Unuttum"),
+                                ),
+                              ],
                             ),
                             _submitButton(),
                             Text(errorMessage!,style: TextStyle(color: Colors.black, fontSize: 18.sp),

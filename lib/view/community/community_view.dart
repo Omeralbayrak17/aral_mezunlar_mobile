@@ -32,6 +32,7 @@ class _CommunityViewState extends State<CommunityView> {
             body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   StreamBuilder(
                   stream: FirebaseFirestore.instance.collection('users').snapshots(),
@@ -219,15 +220,41 @@ class _CommunityViewState extends State<CommunityView> {
                   );
             },
           ),
-                  Center(child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-                    child: Text("Aral Sosyal Medya", style: Theme.of(context).textTheme.displayLarge,),
+                  Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 15.h),
+                        child: Text(
+                          "Aral Galeri Online",
+                          style: Theme.of(context).textTheme.displayLarge,
+                        ),
+                      )),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: SizedBox(
+                        height: 120.h,
+                        child: Image.network(
+                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWmUOvofdKUdxOfLjwXsJiJYHt-yU0XFifxQ&usqp=CAU",
+                          fit: BoxFit.fill,
+                          width: double.infinity,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 10.h),
+                      child: Text(
+                      "Aral Sosyal Medya",
+                      style: Theme.of(context).textTheme.displayLarge,
+                    ),
                   )),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 1.h),
                         child: GFIconButton(
                           icon: const Icon(Icons.facebook),
                           onPressed: (){},
@@ -301,6 +328,7 @@ class _CommunityViewState extends State<CommunityView> {
                           splashColor: Colors.white.withOpacity(0.4),
                         ),
                       ),
+                      SizedBox(height: 120.h,)
                     ],
                   )
                 ],

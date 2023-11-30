@@ -14,4 +14,11 @@ class FirebaseAuthController{
     return FirebaseAuth.instance.currentUser?.uid;
   }
 
+  static Future<void> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } catch (e) {
+    }
+  }
+
 }
