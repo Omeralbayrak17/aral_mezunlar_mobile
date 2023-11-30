@@ -1,0 +1,19 @@
+import 'package:flutter/cupertino.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'flushbar_extension.dart';
+
+class UrlLauncherExtension {
+
+  static Future<void> launchSocialMedia(BuildContext context, String socialMediaUrl) async {
+    Uri url = Uri.parse(socialMediaUrl);
+
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      // ignore: use_build_context_synchronously
+      FlushbarExtension.oneMessageFlushbar(context, "İstenilen sosyal medya uygulamasına bağlanılamıyor.");
+    }
+
+  }
+}

@@ -1,0 +1,5 @@
+flutter_native_splash:
+  image: lib/assets/aral.png
+  color: "#EEF5FF"
+  android: true
+  ios: true
