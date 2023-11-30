@@ -50,10 +50,12 @@ class MyApp extends StatelessWidget {
         colorScheme: const ColorScheme.light(primary: ColorConstants.primaryButtonColor, onSecondary: ColorConstants.secondaryButtonColor),
         textTheme: const TextTheme(
           displayLarge: TextStyle(
-              fontSize: 22
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
           ),
           displayMedium: TextStyle(
-              fontSize: 18
+              fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
           displaySmall: TextStyle(
               fontSize: 14

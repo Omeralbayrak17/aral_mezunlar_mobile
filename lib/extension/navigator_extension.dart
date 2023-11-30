@@ -25,6 +25,32 @@ class NavigatorExtension {
     );
   }
 
+  static PageRouteBuilder expandFromEdgeAnimation(Widget page, Alignment alignment) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return page;
+      },
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = 0.0;
+        const end = 1.0;
+        const curve = Curves.easeInOutCubic;
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        var expandFromEdgeAnimation = animation.drive(tween);
+
+        return Align(
+          alignment: alignment,
+          child: SizeTransition(
+            sizeFactor: expandFromEdgeAnimation,
+            child: child,
+          ),
+        );
+      },
+      reverseTransitionDuration: const Duration(milliseconds: 600),
+      transitionDuration: const Duration(milliseconds: 600),
+    );
+  }
+
   static PageRouteBuilder rightToLeftAnimation(Widget page) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) {

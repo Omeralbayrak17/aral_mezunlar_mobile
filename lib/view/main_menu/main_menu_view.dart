@@ -8,8 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:intl/intl.dart';
@@ -147,7 +145,7 @@ class _MainMenuViewState extends State<MainMenuView> {
                                                     future: FirebaseStorageController.downloadUserProfileImage(userProfileUrl),
                                                     builder: (context, snapshot) {
                                                       if (snapshot.connectionState == ConnectionState.done) {
-                                                        String profilePhotoUrl = snapshot.data! ?? '';
+                                                        String profilePhotoUrl = snapshot.data!;
                                                         return InkWell(
                                                           onTap: () {
                                                             Navigator.push(

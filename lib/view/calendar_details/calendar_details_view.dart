@@ -54,7 +54,7 @@ class _CalendarDetailsViewState extends State<CalendarDetailsView> {
                     padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
                     child: Row(
                       children: [
-                        Expanded(flex: 10, child: Text(widget.title)),
+                        Expanded(flex: 10, child: Text(widget.title, style: Theme.of(context).textTheme.displayMedium,)),
                         Expanded(flex: 2,child: IconButton(icon: const Icon(Icons.share), onPressed: (){
                           launchWhatsAppUri() async {
                             WhatsAppUnilink link = WhatsAppUnilink(

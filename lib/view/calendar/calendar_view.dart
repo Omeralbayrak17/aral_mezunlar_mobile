@@ -1,5 +1,6 @@
 import 'package:aral_mezunlar_mobile/controller/firebase_firestore_controller.dart';
 import 'package:aral_mezunlar_mobile/controller/firebase_storage_controller.dart';
+import 'package:aral_mezunlar_mobile/extension/navigator_extension.dart';
 import 'package:aral_mezunlar_mobile/extension/popup_extension.dart';
 import 'package:aral_mezunlar_mobile/view/calendar_details/calendar_details_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CalendarView extends StatefulWidget {
   const CalendarView({Key? key}) : super(key: key);
@@ -92,7 +94,18 @@ class _CalendarViewState extends State<CalendarView> {
                                     future: FirebaseStorageController.downloadEventImage(eventImage),
                                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                                       if (snapshot.connectionState == ConnectionState.waiting) {
-                                        return const LinearProgressIndicator();
+                                        return Shimmer.fromColors(
+                                          baseColor: Colors.grey[300]!,
+                                          highlightColor: Colors.grey[100]!,
+                                          child: Container(
+                                            height: 120.h,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(color: Colors.black, width: 1),
+                                              color: CupertinoColors.systemGrey5,
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                        );
                                       } else if (snapshot.hasError) {
                                         return Text('Hata: ${snapshot.error}');
                                       } else if (!snapshot.hasData || snapshot.data == null) {
@@ -111,7 +124,7 @@ class _CalendarViewState extends State<CalendarView> {
                                           onTap: () {
                                             Navigator.push(
                                               context,
-                                              MaterialPageRoute(builder: (context) => CalendarDetailsView(title: title, message: message, imageUrl: snapshot.data, googleMapsUrl: locationUrl, whatsappShareMessage: shareMessage,)),
+                                              NavigatorExtension.expandFromEdgeAnimation(CalendarDetailsView(title: title, message: message, imageUrl: snapshot.data, googleMapsUrl: locationUrl, whatsappShareMessage: shareMessage,), Alignment.topCenter),
                                             );
                                           },
                                           child: Column(
@@ -137,6 +150,7 @@ class _CalendarViewState extends State<CalendarView> {
                                                     child: Text(
                                                       title,
                                                       textAlign: TextAlign.start,
+                                                      style: Theme.of(context).textTheme.displayMedium,
                                                     ),
                                                   ),
                                                   Expanded(flex: 3, child: Text(eventDate, textAlign: TextAlign.right,))
@@ -183,7 +197,18 @@ class _CalendarViewState extends State<CalendarView> {
                                     future: FirebaseStorageController.downloadEventImage(eventImage),
                                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                                       if (snapshot.connectionState == ConnectionState.waiting) {
-                                        return const LinearProgressIndicator();
+                                        return Shimmer.fromColors(
+                                          baseColor: Colors.grey[300]!,
+                                          highlightColor: Colors.grey[100]!,
+                                          child: Container(
+                                            height: 120.h,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(color: Colors.black, width: 1),
+                                              color: CupertinoColors.systemGrey5,
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                        );
                                       } else if (snapshot.hasError) {
                                         return Text('Hata: ${snapshot.error}');
                                       } else if (!snapshot.hasData || snapshot.data == null) {
@@ -202,7 +227,7 @@ class _CalendarViewState extends State<CalendarView> {
                                           onTap: () {
                                             Navigator.push(
                                               context,
-                                              MaterialPageRoute(builder: (context) => CalendarDetailsView(title: title, message: message, imageUrl: snapshot.data, googleMapsUrl: locationUrl, whatsappShareMessage: shareMessage,)),
+                                              NavigatorExtension.expandFromEdgeAnimation(CalendarDetailsView(title: title, message: message, imageUrl: snapshot.data, googleMapsUrl: locationUrl, whatsappShareMessage: shareMessage,), Alignment.bottomRight),
                                             );
                                           },
                                           child: Column(
