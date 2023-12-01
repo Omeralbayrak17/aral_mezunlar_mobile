@@ -73,4 +73,31 @@ class NavigatorExtension {
       transitionDuration: const Duration(milliseconds: 600),
     );
   }
+
+  static PageRouteBuilder expandFromMiddleAnimation(Widget page) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return page;
+      },
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = 0.0;
+        const end = 1.0;
+        const curve = Curves.easeInOutCubic;
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        var expandFromEdgeAnimation = animation.drive(tween);
+
+        return Align(
+          alignment: Alignment.centerLeft, // veya Alignment.centerRight
+          child: SizeTransition(
+            sizeFactor: expandFromEdgeAnimation,
+            child: child,
+          ),
+        );
+      },
+      reverseTransitionDuration: const Duration(milliseconds: 600),
+      transitionDuration: const Duration(milliseconds: 600),
+    );
+  }
+
 }

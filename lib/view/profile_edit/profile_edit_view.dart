@@ -99,8 +99,6 @@ class _ProfileEditViewState extends State<ProfileEditView> {
     File imageFile = File(pickedFile.path);
     String imageName = '${widget.uid + date}.jpg';
 
-
-    print("bunun adi ${widget.bannerUrl}");
     if (widget.bannerUrl != null && widget.bannerUrl.isNotEmpty) {
       Reference oldImageReference = FirebaseStorage.instance.ref().child("profilebanners").child(widget.bannerUrl);
       await oldImageReference.delete();

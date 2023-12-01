@@ -1,5 +1,6 @@
 import 'package:aral_mezunlar_mobile/extension/navigator_extension.dart';
 import 'package:aral_mezunlar_mobile/extension/url_launcher_extension.dart';
+import 'package:aral_mezunlar_mobile/view/aral_gallery/aral_gallery_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -224,20 +225,62 @@ class _CommunityViewState extends State<CommunityView> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(vertical: 15.h),
                         child: Text(
-                          "Aral Galeri Online",
+                          "Aral Galeri",
                           style: Theme.of(context).textTheme.displayLarge,
                         ),
                       )),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10.w),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: SizedBox(
-                        height: 120.h,
-                        child: Image.network(
-                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWmUOvofdKUdxOfLjwXsJiJYHt-yU0XFifxQ&usqp=CAU",
-                          fit: BoxFit.fill,
-                          width: double.infinity,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Colors.black,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: SizedBox(
+                          height: 120.h,
+                          child: FutureBuilder<String>(
+                            future: FirebaseStorageController.downloadImageFromStorage("admin", "aralgaleri"),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.done) {
+                                String userProfilePhotoUrl = snapshot.data ?? '';
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.push(context, NavigatorExtension.expandFromMiddleAnimation(AralGalleryView()));
+                                    },
+                                  splashColor: Colors.blue,
+                                  hoverColor: Colors.purpleAccent,
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: CachedNetworkImage(
+                                    imageUrl: userProfilePhotoUrl,
+                                    placeholder: (context, url) => const CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) => GFAvatar(
+                                      backgroundImage: const NetworkImage("https://upload.wikimedia.org/wikipedia/en/d/db/Daryl_Dixon_Norman_Reedus.png"),
+                                      size: 52.sp,
+                                    ),
+                                    imageBuilder: (context, imageProvider) => Image(
+                                      height: 120.h,
+                                      width: ScreenUtil.defaultSize.width,
+                                      image: imageProvider,
+                                      fit: BoxFit.cover, // Tam ekranı kaplamak için
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return Shimmer.fromColors(
+                                  baseColor: Colors.grey[300]!,
+                                  highlightColor: Colors.grey[100]!,
+                                  child: GFAvatar(
+                                    size: 52.sp,
+                                  ),
+                                );
+                              }
+                            },
+                          ),
                         ),
                       ),
                     ),
