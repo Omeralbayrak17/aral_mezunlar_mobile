@@ -257,10 +257,19 @@ class _CommunityViewState extends State<CommunityView> {
                                   borderRadius: BorderRadius.circular(10),
                                   child: CachedNetworkImage(
                                     imageUrl: userProfilePhotoUrl,
-                                    placeholder: (context, url) => const CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) => GFAvatar(
-                                      backgroundImage: const NetworkImage("https://upload.wikimedia.org/wikipedia/en/d/db/Daryl_Dixon_Norman_Reedus.png"),
-                                      size: 52.sp,
+                                    placeholder: (context, url) => Shimmer.fromColors(
+                                      baseColor: Colors.grey[300]!,
+                                      highlightColor: Colors.grey[100]!,
+                                      child: SizedBox(
+                                        height: 120.h,
+                                      ),
+                                    ),
+                                    errorWidget: (context, url, error) => Shimmer.fromColors(
+                                      baseColor: Colors.grey[300]!,
+                                      highlightColor: Colors.grey[100]!,
+                                      child: SizedBox(
+                                        height: 120.h,
+                                      ),
                                     ),
                                     imageBuilder: (context, imageProvider) => Image(
                                       height: 120.h,
@@ -274,8 +283,8 @@ class _CommunityViewState extends State<CommunityView> {
                                 return Shimmer.fromColors(
                                   baseColor: Colors.grey[300]!,
                                   highlightColor: Colors.grey[100]!,
-                                  child: GFAvatar(
-                                    size: 52.sp,
+                                  child: SizedBox(
+                                    height: 120.h,
                                   ),
                                 );
                               }

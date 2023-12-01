@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AralGalleryView extends StatefulWidget {
+  const AralGalleryView({super.key});
+
   @override
   _AralGalleryViewState createState() => _AralGalleryViewState();
 }
