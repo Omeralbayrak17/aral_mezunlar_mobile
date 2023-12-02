@@ -94,15 +94,18 @@ class _CalendarViewState extends State<CalendarView> {
                                     future: FirebaseStorageController.downloadEventImage(eventImage),
                                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                                       if (snapshot.connectionState == ConnectionState.waiting) {
-                                        return Shimmer.fromColors(
-                                          baseColor: Colors.grey[300]!,
-                                          highlightColor: Colors.grey[100]!,
-                                          child: Container(
-                                            height: 120.h,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(color: Colors.black, width: 1),
-                                              color: CupertinoColors.systemGrey5,
-                                              borderRadius: BorderRadius.circular(10),
+                                        return Padding(
+                                          padding: EdgeInsets.only(bottom: 30.h),
+                                          child: Shimmer.fromColors(
+                                            baseColor: Colors.grey[300]!,
+                                            highlightColor: Colors.grey[100]!,
+                                            child: Container(
+                                              height: 120.h,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(color: Colors.black, width: 1),
+                                                color: CupertinoColors.systemGrey5,
+                                                borderRadius: BorderRadius.circular(10),
+                                              ),
                                             ),
                                           ),
                                         );
@@ -197,15 +200,18 @@ class _CalendarViewState extends State<CalendarView> {
                                     future: FirebaseStorageController.downloadEventImage(eventImage),
                                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                                       if (snapshot.connectionState == ConnectionState.waiting) {
-                                        return Shimmer.fromColors(
-                                          baseColor: Colors.grey[300]!,
-                                          highlightColor: Colors.grey[100]!,
-                                          child: Container(
-                                            height: 120.h,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(color: Colors.black, width: 1),
-                                              color: CupertinoColors.systemGrey5,
-                                              borderRadius: BorderRadius.circular(10),
+                                        return Padding(
+                                          padding: EdgeInsets.only(bottom: 30.h),
+                                          child: Shimmer.fromColors(
+                                            baseColor: Colors.grey[300]!,
+                                            highlightColor: Colors.grey[100]!,
+                                            child: Container(
+                                              height: 120.h,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(color: Colors.black, width: 1),
+                                                color: CupertinoColors.systemGrey5,
+                                                borderRadius: BorderRadius.circular(10),
+                                              ),
                                             ),
                                           ),
                                         );
