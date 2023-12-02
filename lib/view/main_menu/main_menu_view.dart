@@ -39,7 +39,7 @@ class _MainMenuViewState extends State<MainMenuView> {
           return SafeArea(
             child: Scaffold(
               body: GestureDetector(
-                onTap: (){
+              onTap: (){
               FocusScope.of(context).requestFocus(FocusNode());
               },
                 child: SingleChildScrollView(

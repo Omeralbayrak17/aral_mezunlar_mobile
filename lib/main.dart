@@ -20,15 +20,8 @@ void main() async {
   await FirebaseNotificationsApi().initNotifications();
   FirebaseNotificationsApi().requestPermissions();
   await FirebaseAppCheck.instance.activate(
-
     webProvider: ReCaptchaV3Provider('894824180910'),
     androidProvider: AndroidProvider.debug,
-    // Default provider for iOS/macOS is the Device Check provider. You can use the "AppleProvider" enum to choose
-    // your preferred provider. Choose from:
-    // 1. Debug provider
-    // 2. Device Check provider
-    // 3. App Attest provider
-    // 4. App Attest provider with fallback to Device Check provider (App Attest provider is only available on iOS 14.0+, macOS 14.0+)
   );
 
   runApp(const MyApp());
@@ -40,48 +33,55 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-    return MaterialApp(
-      title: 'Aral Mezunlar Mobile',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        fontFamily: 'Manrope',
-        scaffoldBackgroundColor: Colors.white,
-        colorScheme: const ColorScheme.light(primary: ColorConstants.primaryButtonColor, onSecondary: ColorConstants.secondaryButtonColor),
-        textTheme: const TextTheme(
-          displayLarge: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          title: 'Aral Mezunlar Mobile',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              useMaterial3: true,
+              fontFamily: 'Manrope',
+              scaffoldBackgroundColor: Colors.white,
+              colorScheme: const ColorScheme.light(primary: ColorConstants.primaryButtonColor, onSecondary: ColorConstants.secondaryButtonColor),
+              textTheme: const TextTheme(
+                  displayLarge: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  displayMedium: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  displaySmall: TextStyle(
+                      fontSize: 14
+                  ),
+                  // HeadlineMedium == ChooseAuthView'daki Giriş Yap fontunu temsil ediyor. Beyaz renginden anlaşılır
+                  headlineMedium: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white
+                  ),
+                  //HeadlineSmall == Tweetleri silerken sil  butonu gibi veya tweet tarihini gösteren tarih gibi küçük gri yazılara verilir
+                  headlineSmall: TextStyle(
+                    fontSize: 10,
+                    color: CupertinoColors.systemGrey3,
+                  )
+              )
           ),
-          displayMedium: TextStyle(
-              fontSize: 18,
-            fontWeight: FontWeight.bold,
+          home: StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.data != null) {
+                return const BottomNavigationBarView();
+              } else {
+                return const ChooseAuthView();
+              }
+            },
           ),
-          displaySmall: TextStyle(
-              fontSize: 14
-          ),
-          // HeadlineMedium == ChooseAuthView'daki Giriş Yap fontunu temsil ediyor. Beyaz renginden anlaşılır
-          headlineMedium: TextStyle(
-            fontSize: 18,
-            color: Colors.white
-          ),
-          //HeadlineSmall == Tweetleri silerken sil  butonu gibi veya tweet tarihini gösteren tarih gibi küçük gri yazılara verilir
-          headlineSmall: TextStyle(
-            fontSize: 10,
-            color: CupertinoColors.systemGrey3,
-          )
-        )
-      ),
-      home: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.data != null) {
-            return const BottomNavigationBarView();
-          } else {
-            return const ChooseAuthView();
-          }
-        },
-      ),
+        );
+      },
     );
   }
 }
