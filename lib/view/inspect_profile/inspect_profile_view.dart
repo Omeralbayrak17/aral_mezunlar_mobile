@@ -1,4 +1,3 @@
-import 'package:aral_mezunlar_mobile/controller/firebase_firestore_controller.dart';
 import 'package:aral_mezunlar_mobile/controller/firebase_storage_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,7 +7,6 @@ import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../constant/color_constants.dart';
 
 class InspectProfileView extends StatefulWidget {
   String name;
@@ -65,7 +63,7 @@ class _InspectProfileViewState extends State<InspectProfileView> {
                                   height: 120.h,
                                   width: ScreenUtil.defaultSize.width,
                                   image: imageProvider,
-                                  fit: BoxFit.cover, // Tam ekranı kaplamak için
+                                  fit: BoxFit.cover,
                                 ),
                               );
                             } else if(snapshot.connectionState == ConnectionState.waiting){

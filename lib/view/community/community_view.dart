@@ -275,7 +275,7 @@ class _CommunityViewState extends State<CommunityView> {
                                       height: 120.h,
                                       width: ScreenUtil.defaultSize.width,
                                       image: imageProvider,
-                                      fit: BoxFit.cover, // Tam ekranı kaplamak için
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 );
@@ -343,7 +343,7 @@ class _CommunityViewState extends State<CommunityView> {
                             icon: const FaIcon(FontAwesomeIcons.instagram, color: Colors.white,),
                             onPressed: () { UrlLauncherExtension.launchSocialMedia(context, "https://www.instagram.com/aralmezunlardernegi"); },
                             iconSize: 34.sp,
-                            color: Colors.transparent, // Icon color should be transparent
+                            color: Colors.transparent,
                             shape: GFIconButtonShape.circle,
                             highlightColor: Colors.white.withOpacity(0.4),
                             focusColor: Colors.white.withOpacity(0.4),

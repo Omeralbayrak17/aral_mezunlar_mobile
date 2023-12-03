@@ -1,7 +1,6 @@
 import 'package:aral_mezunlar_mobile/constant/color_constants.dart';
 import 'package:aral_mezunlar_mobile/extension/navigator_extension.dart';
 import 'package:aral_mezunlar_mobile/view/add_suggestion/add_suggestion_view.dart';
-import 'package:aral_mezunlar_mobile/view/choose_auth/choose_auth_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -108,7 +107,7 @@ class _ProfileViewState extends State<ProfileView> {
                                             height: 120.h,
                                             width: ScreenUtil.defaultSize.width,
                                             image: imageProvider,
-                                            fit: BoxFit.cover, // Tam ekranı kaplamak için
+                                            fit: BoxFit.cover,
                                           ),
                                         );
                                       } else {

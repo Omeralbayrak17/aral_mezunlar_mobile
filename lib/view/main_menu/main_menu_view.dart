@@ -80,13 +80,10 @@ class _MainMenuViewState extends State<MainMenuView> {
                       stream: FirebaseFirestore.instance.collection('posts').orderBy('timestamp', descending: true).snapshots(),
                       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> asyncSnapshot) {
                         if (asyncSnapshot.connectionState == ConnectionState.waiting) {
-                          // Veriler yüklenene kadar bekleyin
                           return const Center(child: RefreshProgressIndicator());
                         } else if (asyncSnapshot.hasError) {
-                          // Hata durumunda
                           return Text('Hata: ${asyncSnapshot.error}');
                         } else {
-                          // Veriler alındı
                           List<QueryDocumentSnapshot> documents = asyncSnapshot.data?.docs ?? [];
 
                           return ListView.builder(

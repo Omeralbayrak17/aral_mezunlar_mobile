@@ -34,7 +34,7 @@ class _AralGalleryViewState extends State<AralGalleryView> {
                   itemCount: downloadUrls.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: EdgeInsets.only(bottom: 20.h, left: 10.w, right: 10.w, top: 5.h), // Öğeler arasındaki boşlukları ayarlayabilirsiniz
+                      padding: EdgeInsets.only(bottom: 20.h, left: 10.w, right: 10.w, top: 5.h),
                       child: Card(
                         elevation: 4.0,
                         shape: RoundedRectangleBorder(

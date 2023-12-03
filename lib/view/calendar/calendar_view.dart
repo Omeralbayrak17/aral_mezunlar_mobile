@@ -112,7 +112,6 @@ class _CalendarViewState extends State<CalendarView> {
                                       } else if (snapshot.hasError) {
                                         return Text('Hata: ${snapshot.error}');
                                       } else if (!snapshot.hasData || snapshot.data == null) {
-                                        // Veri yoksa veya null ise bir hata mesajı veya yerine geçecek bir widget gösterilebilir.
                                         return const Text('Veri bulunamadı');
                                       } else {
                                         return InkWell(
@@ -218,7 +217,6 @@ class _CalendarViewState extends State<CalendarView> {
                                       } else if (snapshot.hasError) {
                                         return Text('Hata: ${snapshot.error}');
                                       } else if (!snapshot.hasData || snapshot.data == null) {
-                                        // Veri yoksa veya null ise bir hata mesajı veya yerine geçecek bir widget gösterilebilir.
                                         return const Text('Veri bulunamadı');
                                       } else {
                                         return InkWell(

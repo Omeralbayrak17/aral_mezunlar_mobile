@@ -88,7 +88,7 @@ class NavigatorExtension {
         var expandFromEdgeAnimation = animation.drive(tween);
 
         return Align(
-          alignment: Alignment.centerLeft, // veya Alignment.centerRight
+          alignment: Alignment.centerLeft,
           child: SizeTransition(
             sizeFactor: expandFromEdgeAnimation,
             child: child,

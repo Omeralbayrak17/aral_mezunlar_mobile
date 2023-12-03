@@ -1,5 +1,4 @@
 import 'package:aral_mezunlar_mobile/controller/firebase_firestore_controller.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,7 +13,7 @@ final TextEditingController _controllerTitle = TextEditingController();
 final TextEditingController _controllerMessage = TextEditingController();
 final TextEditingController _controllerMapsUrl = TextEditingController();
 final TextEditingController _controllerShareMessage = TextEditingController();
-String selectedOption = 'Toplanti'; // Başlangıçta seçili olan seçenek
+String selectedOption = 'Toplanti';
 DateTime selectedDate = DateTime.now();
 TimeOfDay selectedTime = TimeOfDay.now();
 
@@ -54,7 +53,6 @@ class _AddEventViewState extends State<AddEventView> {
 
   @override
   void dispose() {
-    // Controller'ları temizle
     _controllerTitle.clear();
     _controllerMessage.clear();
     _controllerMapsUrl.clear();
@@ -123,7 +121,7 @@ class _AddEventViewState extends State<AddEventView> {
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.of(context).pop(); // Dialog kapatılır
+            Navigator.of(context).pop();
           },
           child: const Text('İptal'),
         ),
@@ -135,7 +133,7 @@ class _AddEventViewState extends State<AddEventView> {
             _controllerMessage.clear();
             _controllerMapsUrl.clear();
             _controllerShareMessage.clear();
-            Navigator.of(context).pop(); // Dialog kapatılır
+            Navigator.of(context).pop();
           },
           child: const Text('Gönder'),
         ),

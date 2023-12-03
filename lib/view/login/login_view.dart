@@ -1,6 +1,5 @@
 import 'package:aral_mezunlar_mobile/constant/color_constants.dart';
 import 'package:aral_mezunlar_mobile/extension/popup_extension.dart';
-import 'package:aral_mezunlar_mobile/view/bottom_navigation_bar/bottom_navigation_bar_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -139,14 +138,12 @@ class _LoginViewState extends State<LoginView> {
                     email: _controllerEmail.text,
                     password: _controllerPassword.text,
                   ).then((value) {
-                    // İşlem tamamlandığında loading ekranını kapat
                     Navigator.pop(context);
-                    // Ana menü sayfasına yönlendir
                   });
                 }
                 Navigator.pop(context);
               } on FirebaseAuthException catch (e) {
-                Navigator.pop(context); // Hata durumunda loading ekranını kapat
+                Navigator.pop(context);
                 if (e.code == 'user-disabled') {
                   setState(() {
                     errorMessage = "Hesabınız uzaklaştırıldı.";

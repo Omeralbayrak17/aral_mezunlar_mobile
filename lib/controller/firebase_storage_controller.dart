@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseStorageController{
@@ -57,14 +56,10 @@ class FirebaseStorageController{
   static Future<List<String>> getAllDownloadUrls(String folderPath) async {
     try {
       List<String> downloadUrls = [];
-
-      // Firebase Storage referansını al
       Reference storageReference = FirebaseStorage.instance.ref().child(folderPath);
 
-      // Klasördeki bütün dosyaları listele
       ListResult result = await storageReference.listAll();
 
-      // Dosyaların indirme bağlantılarını al
       for (Reference ref in result.items) {
         String downloadUrl = await ref.getDownloadURL();
         downloadUrls.add(downloadUrl);
@@ -73,7 +68,7 @@ class FirebaseStorageController{
       return downloadUrls;
     } catch (e) {
       print('Hata: $e');
-      return []; // Hata durumunda boş bir liste döndürülebilir veya başka bir işlem yapılabilir
+      return [];
     }
   }
 

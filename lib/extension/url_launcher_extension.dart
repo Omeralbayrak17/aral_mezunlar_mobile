@@ -11,7 +11,6 @@ class UrlLauncherExtension {
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     } else {
-      // ignore: use_build_context_synchronously
       FlushbarExtension.oneMessageFlushbar(context, "İstenilen sosyal medya uygulamasına bağlanılamıyor.");
     }
 

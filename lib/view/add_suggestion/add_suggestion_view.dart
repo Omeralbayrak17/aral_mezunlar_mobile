@@ -10,14 +10,13 @@ class AddSuggestionView extends StatefulWidget {
 }
 
 final TextEditingController _controllerMessage = TextEditingController();
-final String uid = FirebaseAuth.instance.currentUser!.uid ?? '';
+final String uid = FirebaseAuth.instance.currentUser!.uid;
 
 
 class _AddSuggestionViewState extends State<AddSuggestionView> {
 
   @override
   void dispose() {
-    // Controller'ları temizle
     _controllerMessage.clear();
     super.dispose();
   }
@@ -43,7 +42,7 @@ class _AddSuggestionViewState extends State<AddSuggestionView> {
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.of(context).pop(); // Dialog kapatılır
+            Navigator.of(context).pop();
           },
           child: const Text('İptal'),
         ),
@@ -51,7 +50,7 @@ class _AddSuggestionViewState extends State<AddSuggestionView> {
           onPressed: () {
             FirebaseFirestoreController.firestoreAddSuggestion(context, uid, _controllerMessage.text);
             _controllerMessage.clear();
-            Navigator.of(context).pop(); // Dialog kapatılır
+            Navigator.of(context).pop();
           },
           child: const Text('Gönder'),
         ),
