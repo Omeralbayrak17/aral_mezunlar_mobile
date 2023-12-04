@@ -69,7 +69,7 @@ class _BottomNavigationBarView extends State<BottomNavigationBarView> {
       builder: (context, child){
         return SafeArea(
           child: Scaffold(
-            resizeToAvoidBottomInset: true,
+            resizeToAvoidBottomInset: false,
             appBar: AppBar(
               title: const Text("Aral Mezunlar Mobile"),
               elevation: 3,
@@ -92,6 +92,7 @@ class _BottomNavigationBarView extends State<BottomNavigationBarView> {
               navBarHeight: 50.h,
               bottomScreenMargin: 40.h,
               navBarStyle: NavBarStyle.style13,
+              hideNavigationBarWhenKeyboardShows: true,
             ),
           ),
         );
