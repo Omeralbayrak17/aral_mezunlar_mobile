@@ -1,4 +1,5 @@
 import 'package:aral_mezunlar_mobile/controller/firebase_storage_controller.dart';
+import 'package:aral_mezunlar_mobile/view/add_suggestion/add_suggestion_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +61,6 @@ class _AralGalleryViewState extends State<AralGalleryView> {
                                     String userProfilePhotoUrl = snapshot.data ?? '';
                                     return InkWell(
                                       onTap: () {
-                                        Navigator.push(context, NavigatorExtension.expandFromMiddleAnimation(const AralGalleryView()));
                                       },
                                       splashColor: Colors.blue,
                                       hoverColor: Colors.purpleAccent,
@@ -118,6 +118,7 @@ class _AralGalleryViewState extends State<AralGalleryView> {
           ),
             floatingActionButton: FloatingActionButton(
             onPressed: (){
+              showDialog(context: context, builder: (context) => const AddSuggestionView(),);
             },
             child: const Icon(Icons.add_a_photo),
           ),
