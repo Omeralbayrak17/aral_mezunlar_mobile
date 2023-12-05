@@ -1,9 +1,7 @@
 import 'package:aral_mezunlar_mobile/constant/color_constants.dart';
 import 'package:aral_mezunlar_mobile/extension/popup_extension.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginView extends StatefulWidget {
@@ -105,7 +103,7 @@ class _LoginViewState extends State<LoginView> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return const AlertDialog(
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -141,24 +139,26 @@ class _LoginViewState extends State<LoginView> {
                     Navigator.pop(context);
                   });
                 }
-                Navigator.pop(context);
+                if(mounted) Navigator.pop(context);
               } on FirebaseAuthException catch (e) {
-                Navigator.pop(context);
                 if (e.code == 'user-disabled') {
                   setState(() {
+                    Navigator.pop(context);
                     errorMessage = "Hesabınız uzaklaştırıldı.";
                   });
                 } else if (e.code == 'user-not-found') {
                   setState(() {
+                    Navigator.pop(context);
                     errorMessage = "Girilen e-posta adresi ile bir hesap bulunamadı.";
                   });
                 } else if (e.code == 'wrong-password') {
                   setState(() {
+                    Navigator.pop(context);
                     errorMessage = "E-posta adresinizi veya şifrenizi kontrol edin.";
                   });
                 } else {
-                  Navigator.pop(context);
                   setState(() {
+                    Navigator.pop(context);
                     errorMessage = "Lütfen internet bağlantınızı kontrol edin.";
                   });
                 }
