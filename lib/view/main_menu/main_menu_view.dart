@@ -1,13 +1,16 @@
+import 'dart:async';
 import 'package:aral_mezunlar_mobile/constant/color_constants.dart';
 import 'package:aral_mezunlar_mobile/controller/firebase_auth_controller.dart';
 import 'package:aral_mezunlar_mobile/controller/firebase_firestore_controller.dart';
 import 'package:aral_mezunlar_mobile/extension/navigator_extension.dart';
+import 'package:aral_mezunlar_mobile/extension/popup_extension.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:intl/intl.dart';
@@ -22,6 +25,20 @@ class MainMenuView extends StatefulWidget {
 }
 
 class _MainMenuViewState extends State<MainMenuView> {
+  late StreamController<QuerySnapshot> _postStreamController;
+  late Stream<QuerySnapshot> _postStream;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _postStreamController = StreamController<QuerySnapshot>();
+    _postStream = _postStreamController.stream;
+
+    FirebaseFirestore.instance.collection('posts').orderBy('timestamp', descending: true).snapshots().listen((event) {
+      _postStreamController.add(event);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +94,7 @@ class _MainMenuViewState extends State<MainMenuView> {
                       ),
 
                       StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance.collection('posts').orderBy('timestamp', descending: true).snapshots(),
+                      stream: _postStream,
                       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> asyncSnapshot) {
                         if (asyncSnapshot.connectionState == ConnectionState.waiting) {
                           return const Center(child: RefreshProgressIndicator());
@@ -126,7 +143,11 @@ class _MainMenuViewState extends State<MainMenuView> {
                                   String userProfileAbout = userSnapshot.data != null ? userSnapshot.data!['about'] ?? '' : '';
                                   String userProfileBannerUrl = userSnapshot.data != null ? userSnapshot.data!['bannerurl'] ?? '' : '';
                                   return InkWell(
-                                    onTap: (){},
+                                    onLongPress: (){
+                                      if(FirebaseAuth.instance.currentUser!.uid == uid){
+                                        PopUpExtension.showPostDeleteConfirmationDialog(context, postUid);
+                                      }
+                                    },
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
                                       child: Column(
@@ -187,20 +208,40 @@ class _MainMenuViewState extends State<MainMenuView> {
                                                   ),
                                                 ),
                                               ),
-                                              Expanded(flex: 10, child: Row(
-                                                children: [
-                                                  Text("$userProfileName $userProfileSurname · ",),
-                                                  Text(timeAgo, style: Theme.of(context).textTheme.headlineSmall,),
-                                                  const Spacer(),
-                                                  Visibility(visible: FirebaseAuth.instance.currentUser!.uid == uid, child: IconButton( onPressed: (){ FirebaseFirestoreController.firestoreDeletePost(context, postUid); }, icon: const Icon(Icons.delete), iconSize: 18.sp, color: CupertinoColors.systemGrey3,)),
-                                                ],
-                                              )),
+                                              Expanded(
+                                                flex: 10,
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(top: 15.h),
+                                                  child: Row(
+                                                    children: [
+                                                      Text("$userProfileName $userProfileSurname", style: Theme.of(context).textTheme.titleSmall),
+                                                      const Text(" · "),
+                                                      Text(timeAgo, style: Theme.of(context).textTheme.headlineSmall),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+
                                             ],
                                           ),
                                           Row(
                                             children: [
                                               const Expanded(flex: 2, child: Visibility(visible: false, child: Text(""),)),
-                                              Expanded(flex: 10, child: Text(post)),
+                                              Expanded(flex: 9, child: Text(post)),
+                                              const Spacer(),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Spacer(),
+                                              IconButton(onPressed: null, icon: FaIcon(FontAwesomeIcons.comment, color: CupertinoColors.systemGrey4, size: 18.sp,)),
+                                              const Spacer(),
+                                              IconButton(onPressed: null, icon: FaIcon(FontAwesomeIcons.retweet, color: CupertinoColors.systemGrey4, size: 18.sp,)),
+                                              const Spacer(),
+                                              IconButton(onPressed: (){}, icon: FaIcon(FontAwesomeIcons.heart, color: CupertinoColors.systemGrey4, size: 18.sp,)),
+                                              const Spacer(),
+                                              IconButton(onPressed: (){}, icon: FaIcon(FontAwesomeIcons.bookmark, color: CupertinoColors.systemGrey4, size: 18.sp,)),
+                                              const Spacer(),
                                             ],
                                           ),
                                           Padding(

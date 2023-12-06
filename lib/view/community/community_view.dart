@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:aral_mezunlar_mobile/extension/navigator_extension.dart';
 import 'package:aral_mezunlar_mobile/extension/url_launcher_extension.dart';
 import 'package:aral_mezunlar_mobile/view/aral_gallery/aral_gallery_view.dart';
@@ -22,6 +24,21 @@ class CommunityView extends StatefulWidget {
 
 class _CommunityViewState extends State<CommunityView> {
 
+  late StreamController<QuerySnapshot> _communityStreamController;
+  late Stream<QuerySnapshot> _communityStream;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _communityStreamController = StreamController<QuerySnapshot>();
+    _communityStream = _communityStreamController.stream;
+
+    FirebaseFirestore.instance.collection('users').orderBy('createdAt', descending: true).snapshots().listen((event) {
+      _communityStreamController.add(event);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -36,7 +53,7 @@ class _CommunityViewState extends State<CommunityView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   StreamBuilder(
-                  stream: FirebaseFirestore.instance.collection('users').snapshots(),
+                  stream: _communityStream,
                   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
 
                   if(snapshot.connectionState == ConnectionState.waiting){

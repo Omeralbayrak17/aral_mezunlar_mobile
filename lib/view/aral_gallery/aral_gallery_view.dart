@@ -73,18 +73,18 @@ class _AralGalleryViewState extends State<AralGalleryView> {
                                           baseColor: Colors.grey[300]!,
                                           highlightColor: Colors.grey[100]!,
                                           child: SizedBox(
-                                            height: 160.h,
+                                            height: 180.h,
                                           ),
                                         ),
                                         errorWidget: (context, url, error) => Shimmer.fromColors(
                                           baseColor: Colors.grey[300]!,
                                           highlightColor: Colors.grey[100]!,
                                           child: SizedBox(
-                                            height: 160.h,
+                                            height: 180.h,
                                           ),
                                         ),
                                         imageBuilder: (context, imageProvider) => Image(
-                                          height: 160.h,
+                                          height: 180.h,
                                           width: double.infinity,
                                           image: imageProvider,
                                           fit: BoxFit.fill,
@@ -96,7 +96,7 @@ class _AralGalleryViewState extends State<AralGalleryView> {
                                       baseColor: Colors.grey[300]!,
                                       highlightColor: Colors.grey[100]!,
                                       child: SizedBox(
-                                        height: 120.h,
+                                        height: 180.h,
                                       ),
                                     );
                                   }
