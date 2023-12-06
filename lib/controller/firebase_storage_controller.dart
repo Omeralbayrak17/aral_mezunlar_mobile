@@ -72,4 +72,13 @@ class FirebaseStorageController{
     }
   }
 
+  static Future<void> deleteImageFromStorage(String collection, String documentId) async {
+    try {
+      Reference storageReference = FirebaseStorage.instance.ref().child(collection).child("$documentId.jpg");
+      await storageReference.delete();
+    } catch (e) {
+      return;
+    }
+  }
+
 }
