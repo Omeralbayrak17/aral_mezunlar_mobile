@@ -1,12 +1,11 @@
 import 'package:aral_mezunlar_mobile/controller/firebase_storage_controller.dart';
-import 'package:aral_mezunlar_mobile/view/add_suggestion/add_suggestion_view.dart';
+import 'package:aral_mezunlar_mobile/extension/popup_extension.dart';
+import 'package:aral_mezunlar_mobile/view/add_image_gallery/add_image_gallery_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
-
-import '../../extension/navigator_extension.dart';
 
 class AralGalleryView extends StatefulWidget {
   const AralGalleryView({super.key});
@@ -62,6 +61,9 @@ class _AralGalleryViewState extends State<AralGalleryView> {
                                     return InkWell(
                                       onTap: () {
                                       },
+                                      onLongPress: (){
+                                        PopUpExtension.showGalleryImageDeleteConfirmationDialog(context, documentId);
+                                      },
                                       splashColor: Colors.blue,
                                       hoverColor: Colors.purpleAccent,
                                       borderRadius: BorderRadius.circular(10),
@@ -71,18 +73,18 @@ class _AralGalleryViewState extends State<AralGalleryView> {
                                           baseColor: Colors.grey[300]!,
                                           highlightColor: Colors.grey[100]!,
                                           child: SizedBox(
-                                            height: 130.h,
+                                            height: 160.h,
                                           ),
                                         ),
                                         errorWidget: (context, url, error) => Shimmer.fromColors(
                                           baseColor: Colors.grey[300]!,
                                           highlightColor: Colors.grey[100]!,
                                           child: SizedBox(
-                                            height: 130.h,
+                                            height: 160.h,
                                           ),
                                         ),
                                         imageBuilder: (context, imageProvider) => Image(
-                                          height: 130.h,
+                                          height: 160.h,
                                           width: double.infinity,
                                           image: imageProvider,
                                           fit: BoxFit.fill,
@@ -118,7 +120,7 @@ class _AralGalleryViewState extends State<AralGalleryView> {
           ),
             floatingActionButton: FloatingActionButton(
             onPressed: (){
-              showDialog(context: context, builder: (context) => const AddSuggestionView(),);
+              showDialog(context: context, builder: (context) => const AddImageGalleryView(),);
             },
             child: const Icon(Icons.add_a_photo),
           ),
