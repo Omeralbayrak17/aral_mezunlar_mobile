@@ -3,6 +3,7 @@ import 'package:aral_mezunlar_mobile/extension/popup_extension.dart';
 import 'package:aral_mezunlar_mobile/view/add_image_gallery/add_image_gallery_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
@@ -33,7 +34,7 @@ class _AralGalleryViewState extends State<AralGalleryView> {
                 return Text('Hata: ${snapshot.error}');
               } else {
                 List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
-                documents.sort((a, b) => a['timestamp'].compareTo(b['timestamp']));
+                documents.sort((a, b) => b['timestamp'].compareTo(a['timestamp']));
 
                 return ListView.builder(
                   itemCount: documents.length,
@@ -61,8 +62,13 @@ class _AralGalleryViewState extends State<AralGalleryView> {
                                     return InkWell(
                                       onTap: () {
                                       },
-                                      onLongPress: (){
-                                        PopUpExtension.showGalleryImageDeleteConfirmationDialog(context, documentId);
+                                      onLongPress: () async {
+                                        String userRole = await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).get().then((doc) {
+                                          return doc['role'] as String;
+                                        });
+                                        if(userRole == "Yönetim"){
+                                          if(mounted) PopUpExtension.showGalleryImageDeleteConfirmationDialog(context, documentId);
+                                        }
                                       },
                                       splashColor: Colors.blue,
                                       hoverColor: Colors.purpleAccent,
@@ -87,7 +93,7 @@ class _AralGalleryViewState extends State<AralGalleryView> {
                                           height: 180.h,
                                           width: double.infinity,
                                           image: imageProvider,
-                                          fit: BoxFit.fill,
+                                          fit: BoxFit.fitHeight,
                                         ),
                                       ),
                                     );

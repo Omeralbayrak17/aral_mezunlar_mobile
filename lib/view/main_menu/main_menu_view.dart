@@ -142,6 +142,7 @@ class _MainMenuViewState extends State<MainMenuView> {
                                   String userProfileSurname = userSnapshot.data != null ? userSnapshot.data!['surname'] ?? '' : '';
                                   String userProfileAbout = userSnapshot.data != null ? userSnapshot.data!['about'] ?? '' : '';
                                   String userProfileBannerUrl = userSnapshot.data != null ? userSnapshot.data!['bannerurl'] ?? '' : '';
+
                                   return InkWell(
                                     onLongPress: (){
                                       if(FirebaseAuth.instance.currentUser!.uid == uid){
@@ -238,8 +239,24 @@ class _MainMenuViewState extends State<MainMenuView> {
                                               const Spacer(),
                                               IconButton(onPressed: null, icon: FaIcon(FontAwesomeIcons.retweet, color: CupertinoColors.systemGrey4, size: 18.sp,)),
                                               const Spacer(),
-                                              IconButton(onPressed: (){}, icon: FaIcon(FontAwesomeIcons.heart, color: CupertinoColors.systemGrey4, size: 18.sp,)),
+                                              StreamBuilder<DocumentSnapshot>(
+                                                stream: FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).snapshots(),
+                                                builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> userSnapshot) {
+                                                  List likes = userSnapshot.data?['likes'] ?? [];
+                                                  return IconButton(
+                                                    onPressed: () async {
+                                                      await FirebaseFirestoreController.addLikeToUser(FirebaseAuth.instance.currentUser!.uid, postUid);
+                                                    },
+                                                    icon: Icon(
+                                                      likes.contains(postUid) ? Icons.favorite : Icons.favorite_border,
+                                                      color: likes.contains(postUid) ? Colors.red : CupertinoColors.systemGrey4,
+                                                      size: 18.sp,
+                                                    ),
+                                                  );
+                                                },
+                                              ),
                                               const Spacer(),
+
                                               IconButton(onPressed: (){}, icon: FaIcon(FontAwesomeIcons.bookmark, color: CupertinoColors.systemGrey4, size: 18.sp,)),
                                               const Spacer(),
                                             ],

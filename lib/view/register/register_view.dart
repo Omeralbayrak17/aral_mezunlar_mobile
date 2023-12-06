@@ -303,6 +303,7 @@ class _RegisterViewState extends State<RegisterView> {
                             'imageurl': " ",
                             'bannerurl': "",
                             'uid': uid,
+                            'likes': [],
                             'createdAt': FieldValue.serverTimestamp(),
                           }).then((value) {
                             // İşlem tamamlandığında loading ekranını kapat

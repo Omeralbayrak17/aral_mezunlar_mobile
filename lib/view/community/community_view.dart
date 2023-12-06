@@ -97,11 +97,9 @@ class _CommunityViewState extends State<CommunityView> {
                         child: Text("Aral Mezunlar Derneği Üyelerimiz", style: Theme.of(context).textTheme.displayMedium,),
                       )),
                       SizedBox(height: 5.h,),
-                      Divider(height: 1.h,),
-                      SizedBox(height: 5.h,),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15.w),
-                        child: const Text("Yönetim Kurulu"),
+                        child: Text("Yönetim Kurulu", style: Theme.of(context).textTheme.titleSmall,),
                       ),
                       SizedBox(height: 5.h,),
                       SizedBox(
@@ -168,7 +166,7 @@ class _CommunityViewState extends State<CommunityView> {
                       SizedBox(height: 5.h,),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15.w),
-                        child: const Text("Üyeler"),
+                        child: Text("Üyeler", style: Theme.of(context).textTheme.titleSmall,),
                       ),
                       SizedBox(height: 5.h,),
                       SizedBox(

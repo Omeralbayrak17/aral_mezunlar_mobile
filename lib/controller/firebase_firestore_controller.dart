@@ -89,4 +89,24 @@ class FirebaseFirestoreController {
 
   }
 
+  static Future<void> addLikeToUser(String userUid, String postUid) async {
+    DocumentReference userRef = FirebaseFirestore.instance.collection('users')
+        .doc(userUid);
+
+    DocumentSnapshot userSnapshot = await userRef.get();
+
+    if (userSnapshot.exists) {
+      List<dynamic> likes = userSnapshot['likes'] ?? [];
+
+      if (!likes.contains(postUid)) {
+        likes.add(postUid);
+        await userRef.update({'likes': likes});
+      }
+      else{
+        await userRef.update({
+          'likes': FieldValue.arrayRemove([postUid])
+        });
+      }
+    }
+  }
 }
