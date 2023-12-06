@@ -51,12 +51,11 @@ class PopUpExtension{
 
                   FirebaseStorageController.deleteImageFromStorage("aralgaleri", documentId);
 
-                  print('Belge ve dosya başarıyla silindi.');
                 } catch (e) {
-                  print('Hata oluştu: $e');
+                  return;
                 }
                 Navigator.of(context).pop();
-                if(context.mounted) FlushbarExtension.oneMessageFlushbar(context, "Etkinlik silindi");
+                if(context.mounted) FlushbarExtension.oneMessageFlushbar(context, "Fotoğraf silindi");
               },
               child: const Text('Evet'),
             ),
