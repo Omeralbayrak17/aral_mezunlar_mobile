@@ -65,9 +65,12 @@ class MyApp extends StatelessWidget {
                   ),
                   //HeadlineSmall == Tweetleri silerken sil  butonu gibi veya tweet tarihini gösteren tarih gibi küçük gri yazılara verilir
                   headlineSmall: TextStyle(
-                    fontSize: 10,
+                    fontSize: 12,
                     color: CupertinoColors.systemGrey3,
-                  )
+                  ),
+                titleSmall: TextStyle(
+                  fontWeight: FontWeight.bold,
+                )
               )
           ),
           home: StreamBuilder<User?>(
