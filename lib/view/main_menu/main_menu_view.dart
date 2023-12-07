@@ -144,7 +144,6 @@ class _MainMenuViewState extends State<MainMenuView> {
                                   String userProfileSurname = userSnapshot.data != null ? userSnapshot.data!['surname'] ?? '' : '';
                                   String userProfileAbout = userSnapshot.data != null ? userSnapshot.data!['about'] ?? '' : '';
                                   String userProfileBannerUrl = userSnapshot.data != null ? userSnapshot.data!['bannerurl'] ?? '' : '';
-
                                   return InkWell(
                                     onLongPress: (){
                                       if(FirebaseAuth.instance.currentUser!.uid == uid){
@@ -263,7 +262,6 @@ class _MainMenuViewState extends State<MainMenuView> {
                                                 },
                                               ),
                                               const Spacer(),
-
                                               IconButton(onPressed: (){}, icon: FaIcon(FontAwesomeIcons.bookmark, color: CupertinoColors.systemGrey4, size: 18.sp,)),
                                               const Spacer(),
                                             ],
