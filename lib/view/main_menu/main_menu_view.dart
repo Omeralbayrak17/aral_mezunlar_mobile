@@ -115,6 +115,8 @@ class _MainMenuViewState extends State<MainMenuView> {
                               String post = data['post'] ?? '';
                               String uid = data['uid'] ?? '';
                               Timestamp? postTimeStamp = data['timestamp'];
+                              List<dynamic> likesList = data['likes'] ?? [];
+                              int likeCount = likesList.length;
 
                               String timeAgo = '';
                               if (postTimeStamp != null) {
@@ -243,15 +245,20 @@ class _MainMenuViewState extends State<MainMenuView> {
                                                 stream: FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).snapshots(),
                                                 builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> userSnapshot) {
                                                   List likes = userSnapshot.data?['likes'] ?? [];
-                                                  return IconButton(
-                                                    onPressed: () async {
-                                                      await FirebaseFirestoreController.addLikeToUser(FirebaseAuth.instance.currentUser!.uid, postUid);
-                                                    },
-                                                    icon: Icon(
-                                                      likes.contains(postUid) ? Icons.favorite : Icons.favorite_border,
-                                                      color: likes.contains(postUid) ? Colors.red : CupertinoColors.systemGrey4,
-                                                      size: 18.sp,
-                                                    ),
+                                                  return Row(
+                                                    children: [
+                                                      IconButton(
+                                                        onPressed: () async {
+                                                          await FirebaseFirestoreController.addLikeToUser(FirebaseAuth.instance.currentUser!.uid, postUid);
+                                                        },
+                                                        icon: Icon(
+                                                          likes.contains(postUid) ? Icons.favorite : Icons.favorite_border,
+                                                          color: likes.contains(postUid) ? Colors.red : CupertinoColors.systemGrey4,
+                                                          size: 18.sp,
+                                                        ),
+                                                      ),
+                                                      Text(likeCount.toString(), style: Theme.of(context).textTheme.headlineSmall,)
+                                                    ],
                                                   );
                                                 },
                                               ),
