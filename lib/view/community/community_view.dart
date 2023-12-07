@@ -133,7 +133,13 @@ class _CommunityViewState extends State<CommunityView> {
                                           borderRadius: BorderRadius.circular(32.sp),
                                           child: CachedNetworkImage(
                                             imageUrl: userProfilePhotoUrl,
-                                            placeholder: (context, url) => const CircularProgressIndicator(),
+                                            placeholder: (context, url) => Shimmer.fromColors(
+                                              baseColor: Colors.grey[300]!,
+                                              highlightColor: Colors.grey[100]!,
+                                              child: GFAvatar(
+                                                size: 52.sp,
+                                              ),
+                                            ),
                                             errorWidget: (context, url, error) => GFAvatar(
                                               backgroundImage: const NetworkImage("https://upload.wikimedia.org/wikipedia/en/d/db/Daryl_Dixon_Norman_Reedus.png"),
                                               size: 52.sp,
@@ -201,7 +207,13 @@ class _CommunityViewState extends State<CommunityView> {
                                           borderRadius: BorderRadius.circular(32.sp),
                                           child: CachedNetworkImage(
                                             imageUrl: userProfilePhotoUrl,
-                                            placeholder: (context, url) => const CircularProgressIndicator(),
+                                            placeholder: (context, url) => Shimmer.fromColors(
+                                              baseColor: Colors.grey[300]!,
+                                              highlightColor: Colors.grey[100]!,
+                                              child: GFAvatar(
+                                                size: 52.sp,
+                                              ),
+                                            ),
                                             errorWidget: (context, url, error) => GFAvatar(
                                               backgroundImage: const NetworkImage("https://upload.wikimedia.org/wikipedia/en/d/db/Daryl_Dixon_Norman_Reedus.png"),
                                               size: 52.sp,
