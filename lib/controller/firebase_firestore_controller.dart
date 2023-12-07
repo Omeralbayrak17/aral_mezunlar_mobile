@@ -17,7 +17,8 @@ class FirebaseFirestoreController {
     FirebaseFirestore.instance.collection('posts').add({
       'uid': uid,
       'post': post,
-      'timestamp': FieldValue.serverTimestamp()
+      'likes': [],
+      'timestamp': FieldValue.serverTimestamp(),
     }).then((value) {
       FlushbarExtension.oneMessageFlushbar(context, "Gönderi eklendi");
     }).catchError((error) {
@@ -90,21 +91,28 @@ class FirebaseFirestoreController {
   }
 
   static Future<void> addLikeToUser(String userUid, String postUid) async {
-    DocumentReference userRef = FirebaseFirestore.instance.collection('users')
-        .doc(userUid);
+    DocumentReference userRef = FirebaseFirestore.instance.collection('users').doc(userUid);
+    DocumentReference postRef = FirebaseFirestore.instance.collection('posts').doc(postUid);
 
     DocumentSnapshot userSnapshot = await userRef.get();
+    DocumentSnapshot postSnapshot = await postRef.get();
 
     if (userSnapshot.exists) {
-      List<dynamic> likes = userSnapshot['likes'] ?? [];
+      List<dynamic> userLikes = userSnapshot['likes'] ?? [];
+      List<dynamic> postLikes = postSnapshot['likes'] ?? [];
 
-      if (!likes.contains(postUid)) {
-        likes.add(postUid);
-        await userRef.update({'likes': likes});
+      if (!userLikes.contains(postUid) && !postLikes.contains(userUid)) {
+        userLikes.add(postUid);
+        postLikes.add(userUid);
+        await userRef.update({'likes': userLikes});
+        await postRef.update({'likes': postLikes});
       }
       else{
         await userRef.update({
           'likes': FieldValue.arrayRemove([postUid])
+        });
+        await postRef.update({
+          'likes': FieldValue.arrayRemove([userUid])
         });
       }
     }
