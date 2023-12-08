@@ -116,4 +116,18 @@ class FirebaseFirestoreController {
       }
     }
   }
+
+  static Future<int> getLikeCount(String postUid) async {
+    try {
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+          .collection('posts')
+          .doc(postUid)
+          .get();
+
+      List likeList = snapshot['likes'];
+      return likeList.length;
+    } catch (e) {
+      return 0;
+    }
+  }
 }

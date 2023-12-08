@@ -41,7 +41,7 @@ class FirebaseNotificationsApi {
             ElevatedButton(
               child: const Text("Tamam"),
               onPressed: () {
-                requestPermissions(); // Yeniden izin iste
+                requestPermissions();
                 Navigator.of(_scaffoldKey.currentContext!).pop();
               },
             ),
@@ -49,7 +49,9 @@ class FirebaseNotificationsApi {
         );
       },
     );
-  }  final _firebaseMessaging = FirebaseMessaging.instance;
+  }
+
+  final _firebaseMessaging = FirebaseMessaging.instance;
 
   Future<void> initNotifications() async {
     var permissionGranted = await _firebaseMessaging.requestPermission();

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:aral_mezunlar_mobile/extension/navigator_extension.dart';
 import 'package:aral_mezunlar_mobile/extension/url_launcher_extension.dart';
 import 'package:aral_mezunlar_mobile/view/aral_gallery/aral_gallery_view.dart';
@@ -277,7 +276,7 @@ class _CommunityViewState extends State<CommunityView> {
                                 String userProfilePhotoUrl = snapshot.data ?? '';
                                 return InkWell(
                                   onTap: () {
-                                    Navigator.push(context, NavigatorExtension.expandFromMiddleAnimation(AralGalleryView()));
+                                    Navigator.push(context, NavigatorExtension.expandFromMiddleAnimation(const AralGalleryView()));
                                     },
                                   splashColor: Colors.blue,
                                   hoverColor: Colors.purpleAccent,
