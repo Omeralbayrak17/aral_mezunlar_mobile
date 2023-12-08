@@ -100,7 +100,7 @@ class _MainMenuViewState extends State<MainMenuView> {
                         if (asyncSnapshot.connectionState == ConnectionState.waiting) {
                           return const Center(child: RefreshProgressIndicator());
                         } else if (asyncSnapshot.hasError) {
-                          return Text('Hata: ${asyncSnapshot.error}');
+                          return Text('Verileri getirirken hata oluştu: ${asyncSnapshot.error}');
                         } else {
                           List<QueryDocumentSnapshot> documents = asyncSnapshot.data?.docs ?? [];
 
@@ -153,7 +153,7 @@ class _MainMenuViewState extends State<MainMenuView> {
                                       }
                                     },
                                     onTap: (){
-                                      Navigator.push(context, NavigatorExtension.sizeShrinkAnimation(PostDetailView(postUid: postUid, userProfileName: userProfileName, userProfileSurname: userProfileSurname, post: post, timeAgo: timeAgo, likeList: likesList, userProfilePhoto: profilePhotoUrl,)));
+                                      Navigator.push(context, NavigatorExtension.expandFromEdgeAnimation(PostDetailView(postUid: postUid, userProfileName: userProfileName, userProfileSurname: userProfileSurname, post: post, timeAgo: timeAgo, likeList: likesList, userProfilePhoto: profilePhotoUrl,), Alignment.topCenter ));
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),

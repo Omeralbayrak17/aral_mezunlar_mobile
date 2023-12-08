@@ -151,7 +151,7 @@ class _LoginViewState extends State<LoginView> {
                     Navigator.pop(context);
                     errorMessage = "Girilen e-posta adresi ile bir hesap bulunamadı.";
                   });
-                } else if (e.code == 'wrong-password') {
+                } else if (e.code == 'invalid-credential') {
                   setState(() {
                     Navigator.pop(context);
                     errorMessage = "E-posta adresinizi veya şifrenizi kontrol edin.";

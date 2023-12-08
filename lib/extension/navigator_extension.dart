@@ -100,26 +100,4 @@ class NavigatorExtension {
     );
   }
 
-  static PageRouteBuilder sizeShrinkAnimation(Widget page) {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) {
-        return page;
-      },
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = 0.0;
-        const end = 1.0;
-        const curve = Curves.easeInOutCubic;
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-        var sizeShrinkAnimation = animation.drive(tween);
-
-        return ScaleTransition(
-          scale: sizeShrinkAnimation,
-          child: child,
-        );
-      },
-      reverseTransitionDuration: const Duration(milliseconds: 350),
-      transitionDuration: const Duration(milliseconds: 350),
-    );
-  }
 }
