@@ -241,9 +241,9 @@ class _MainMenuViewState extends State<MainMenuView> {
                                           Row(
                                             children: [
                                               const Spacer(),
-                                              IconButton(onPressed: null, icon: FaIcon(FontAwesomeIcons.comment, color: CupertinoColors.systemGrey4, size: 18.sp,)),
+                                              IconButton(onPressed: (){}, icon: FaIcon(FontAwesomeIcons.comment, color: CupertinoColors.systemGrey4, size: 18.sp,)),
                                               const Spacer(),
-                                              IconButton(onPressed: null, icon: FaIcon(FontAwesomeIcons.retweet, color: CupertinoColors.systemGrey4, size: 18.sp,)),
+                                              IconButton(onPressed: (){}, icon: FaIcon(FontAwesomeIcons.retweet, color: CupertinoColors.systemGrey4, size: 18.sp,)),
                                               const Spacer(),
                                               StreamBuilder<DocumentSnapshot>(
                                                 stream: FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).snapshots(),
