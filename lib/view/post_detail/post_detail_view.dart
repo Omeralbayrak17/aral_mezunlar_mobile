@@ -33,6 +33,7 @@ class _PostDetailViewState extends State<PostDetailView> {
     setState(() {
       likeCount=widget.likeList.length;
     });
+    super.initState();
   }
 
   @override
