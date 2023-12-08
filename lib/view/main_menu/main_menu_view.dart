@@ -153,7 +153,7 @@ class _MainMenuViewState extends State<MainMenuView> {
                                       }
                                     },
                                     onTap: (){
-                                      Navigator.push(context, NavigatorExtension.expandFromMiddleAnimation(PostDetailView(postUid: postUid, userProfileName: userProfileName, userProfileSurname: userProfileSurname, post: post, timeAgo: timeAgo, likeList: likesList, userProfilePhoto: profilePhotoUrl,)));
+                                      Navigator.push(context, NavigatorExtension.sizeShrinkAnimation(PostDetailView(postUid: postUid, userProfileName: userProfileName, userProfileSurname: userProfileSurname, post: post, timeAgo: timeAgo, likeList: likesList, userProfilePhoto: profilePhotoUrl,)));
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),

@@ -72,8 +72,9 @@ class _BottomNavigationBarView extends State<BottomNavigationBarView> {
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
               title: const Text("Aral Mezunlar Mobile"),
+              centerTitle: true,
               elevation: 3,
-              toolbarHeight: ScreenUtil.defaultSize.height * 7 / 100,
+              toolbarHeight: ScreenUtil.defaultSize.height * 8 / 100,
               actions: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -81,7 +82,7 @@ class _BottomNavigationBarView extends State<BottomNavigationBarView> {
                 ),
               ],
               shadowColor: Colors.black,
-              titleTextStyle: const TextStyle(color: Colors.white, fontSize: 20),
+              titleTextStyle: Theme.of(context).textTheme.headlineMedium,
               backgroundColor: ColorConstants.primaryButtonColor,
             ),
             body: PersistentTabView(

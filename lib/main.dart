@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
-          title: 'Aral Mezunlar Mobile',
+          title: 'Aral Mezunlar',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
               useMaterial3: true,
