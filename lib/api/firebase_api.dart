@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -51,10 +52,16 @@ class FirebaseNotificationsApi {
   }  final _firebaseMessaging = FirebaseMessaging.instance;
 
   Future<void> initNotifications() async {
-    await _firebaseMessaging.requestPermission();
-    final fCMToken = await _firebaseMessaging.getToken();
-    print(fCMToken);
-
-    FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
+    var permissionGranted = await _firebaseMessaging.requestPermission();
+    if (permissionGranted == PermissionStatus.granted) {
+      var connectivityResult = await Connectivity().checkConnectivity();
+      if (connectivityResult == ConnectivityResult.none) {
+      } else {
+        FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
+      }
+    } else {
+        FirebaseNotificationsApi().requestPermissions();
+    }
   }
+
 }
