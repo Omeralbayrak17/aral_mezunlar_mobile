@@ -4,6 +4,7 @@ import 'package:aral_mezunlar_mobile/controller/firebase_auth_controller.dart';
 import 'package:aral_mezunlar_mobile/controller/firebase_firestore_controller.dart';
 import 'package:aral_mezunlar_mobile/extension/navigator_extension.dart';
 import 'package:aral_mezunlar_mobile/extension/popup_extension.dart';
+import 'package:aral_mezunlar_mobile/view/post_detail/post_detail_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -144,11 +145,15 @@ class _MainMenuViewState extends State<MainMenuView> {
                                   String userProfileSurname = userSnapshot.data != null ? userSnapshot.data!['surname'] ?? '' : '';
                                   String userProfileAbout = userSnapshot.data != null ? userSnapshot.data!['about'] ?? '' : '';
                                   String userProfileBannerUrl = userSnapshot.data != null ? userSnapshot.data!['bannerurl'] ?? '' : '';
+                                  String profilePhotoUrl = "";
                                   return InkWell(
                                     onLongPress: (){
                                       if(FirebaseAuth.instance.currentUser!.uid == uid){
                                         PopUpExtension.showPostDeleteConfirmationDialog(context, postUid);
                                       }
+                                    },
+                                    onTap: (){
+                                      Navigator.push(context, NavigatorExtension.expandFromMiddleAnimation(PostDetailView(postUid: postUid, userProfileName: userProfileName, userProfileSurname: userProfileSurname, post: post, timeAgo: timeAgo, likeList: likesList, userProfilePhoto: profilePhotoUrl,)));
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
@@ -165,7 +170,7 @@ class _MainMenuViewState extends State<MainMenuView> {
                                                     future: FirebaseStorageController.downloadUserProfileImage(userProfileUrl),
                                                     builder: (context, snapshot) {
                                                       if (snapshot.connectionState == ConnectionState.done) {
-                                                        String profilePhotoUrl = snapshot.data!;
+                                                        profilePhotoUrl = snapshot.data!;
                                                         return InkWell(
                                                           onTap: () {
                                                             Navigator.push(
