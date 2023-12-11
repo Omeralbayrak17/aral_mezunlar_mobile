@@ -1,19 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
 class CalendarDetailsView extends StatefulWidget {
 
-  String title;
-  String message;
-  String googleMapsUrl;
-  String whatsappShareMessage;
-  String imageUrl;
+  final String title;
+  final String message;
+  final String googleMapsUrl;
+  final String whatsappShareMessage;
+  final String imageUrl;
 
-  CalendarDetailsView({Key? key, required this.title, required this.message, required this.googleMapsUrl, required this.whatsappShareMessage, required this.imageUrl}) : super(key: key);
+  const CalendarDetailsView({Key? key, required this.title, required this.message, required this.googleMapsUrl, required this.whatsappShareMessage, required this.imageUrl}) : super(key: key);
 
 
   @override

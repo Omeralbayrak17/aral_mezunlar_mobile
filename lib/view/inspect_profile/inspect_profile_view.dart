@@ -9,12 +9,12 @@ import 'package:shimmer/shimmer.dart';
 
 
 class InspectProfileView extends StatefulWidget {
-  String name;
-  String surname;
-  String about;
-  String profilePhotoUrl;
-  String profileBannerUrl;
-  InspectProfileView({super.key, required this.name, required this.surname, required this.about, required this.profilePhotoUrl, required this.profileBannerUrl});
+  final String name;
+  final String surname;
+  final String about;
+  final String profilePhotoUrl;
+  final String profileBannerUrl;
+  const InspectProfileView({super.key, required this.name, required this.surname, required this.about, required this.profilePhotoUrl, required this.profileBannerUrl});
 
   @override
   State<InspectProfileView> createState() => _InspectProfileViewState();

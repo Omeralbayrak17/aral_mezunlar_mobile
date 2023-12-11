@@ -12,7 +12,6 @@ import 'package:getwidget/getwidget.dart';
 import 'package:getwidget/shape/gf_avatar_shape.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../extension/flushbar_extension.dart';
 
 class ProfileEditView extends StatefulWidget {
