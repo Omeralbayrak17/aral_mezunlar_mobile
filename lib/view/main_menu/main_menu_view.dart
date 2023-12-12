@@ -28,6 +28,9 @@ class MainMenuView extends StatefulWidget {
 class _MainMenuViewState extends State<MainMenuView> {
   late StreamController<QuerySnapshot> _postStreamController;
   late Stream<QuerySnapshot> _postStream;
+  String? uid = FirebaseAuthController.getCurrentUser();
+  final TextEditingController _controllerPost = TextEditingController();
+  final FocusNode _focusNodePost = FocusNode();
 
   @override
   void initState() {
@@ -43,10 +46,6 @@ class _MainMenuViewState extends State<MainMenuView> {
 
   @override
   Widget build(BuildContext context) {
-    
-    String? uid = FirebaseAuthController.getCurrentUser();
-    final TextEditingController _controllerPost = TextEditingController();
-    final FocusNode _focusNodePost = FocusNode();
 
 
     return ScreenUtilInit(
@@ -58,7 +57,7 @@ class _MainMenuViewState extends State<MainMenuView> {
             child: Scaffold(
               body: GestureDetector(
               onTap: (){
-              FocusScope.of(context).requestFocus(FocusNode());
+              FocusScope.of(context).unfocus();
               },
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
@@ -76,6 +75,7 @@ class _MainMenuViewState extends State<MainMenuView> {
                             maxLength: 180,
                             autofocus: false,
                             keyboardType: TextInputType.text,
+                            onTapOutside: (event) => _focusNodePost.unfocus(),
                             textCapitalization: TextCapitalization.sentences,
                             decoration: InputDecoration(
                               counterStyle: TextStyle(fontSize: 12.sp),

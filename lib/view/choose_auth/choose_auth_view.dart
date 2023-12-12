@@ -46,7 +46,7 @@ class _ChooseAuthViewState extends State<ChooseAuthView> {
                         ),
                       ),
                       SizedBox(height: 20.h,),
-                      const Text("2024 🖤", textAlign: TextAlign.center),
+                      Text("Hoş geldin 2024 🖤", textAlign: TextAlign.center, style: Theme.of(context).textTheme.displayMedium),
                       const Spacer(),
                       SizedBox(
                         height: 50.h,
