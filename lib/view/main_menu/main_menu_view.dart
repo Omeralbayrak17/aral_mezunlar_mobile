@@ -87,7 +87,7 @@ class _MainMenuViewState extends State<MainMenuView> {
                             bottom: 25,
                             right: 0,
                             child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.w),
+                              padding: EdgeInsets.symmetric(horizontal: 8.w),
                               child: GFButton(onPressed: (){ FirebaseFirestoreController.firestoreAddPost(uid!, context, _controllerPost.text); _controllerPost.clear(); _focusNodePost.unfocus(); }, shape: GFButtonShape.standard, color: ColorConstants.primaryButtonColor, child: const Text("Paylaş"),),
                             ),
                           ),

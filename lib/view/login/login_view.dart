@@ -68,6 +68,7 @@ class _LoginViewState extends State<LoginView> {
         },
         controller: controller,
         obscureText: _isSecure,
+        keyboardType: TextInputType.visiblePassword,
         style: TextStyle(fontSize: 12.sp),
         decoration: InputDecoration(
             suffixIcon: togglePassword(),
