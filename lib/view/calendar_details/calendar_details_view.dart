@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
@@ -55,7 +56,7 @@ class _CalendarDetailsViewState extends State<CalendarDetailsView> {
                     child: Row(
                       children: [
                         Expanded(flex: 10, child: Text(widget.title, style: Theme.of(context).textTheme.displayMedium,)),
-                        Expanded(flex: 2,child: IconButton(icon: const Icon(Icons.share), onPressed: (){
+                        Expanded(flex: 2,child: IconButton(icon: const FaIcon(FontAwesomeIcons.whatsapp), onPressed: (){
                           launchWhatsAppUri() async {
                             WhatsAppUnilink link = WhatsAppUnilink(
                               phoneNumber: '+90-(507)8998837',
