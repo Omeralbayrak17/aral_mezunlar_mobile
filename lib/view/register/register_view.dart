@@ -197,6 +197,7 @@ class _RegisterViewState extends State<RegisterView> {
         },
         controller: controller,
         obscureText: _isSecure,
+        keyboardType: TextInputType.visiblePassword,
         style: TextStyle(fontSize: 12.sp),
         decoration: InputDecoration(
             suffixIcon: togglePassword(),
@@ -227,6 +228,7 @@ class _RegisterViewState extends State<RegisterView> {
         },
         style: TextStyle(fontSize: 12.sp),
         controller: controller,
+        keyboardType: TextInputType.visiblePassword,
         obscureText: _isConfirmSecure,
         decoration: InputDecoration(
             suffixIcon: toggleConfirmPassword(),
