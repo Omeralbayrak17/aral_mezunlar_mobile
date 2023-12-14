@@ -39,8 +39,6 @@ class FirebaseFirestoreController {
 
   static firestoreAddEvent(String title, String message, String mapsUrl, String shareMessage, String imageUrl, DateTime eventDate){
 
-    print("date time $eventDate");
-
     FirebaseFirestore.instance.collection('events').add({
       'title': title,
       'message': message,
