@@ -1,4 +1,3 @@
-
 import 'package:aral_mezunlar_mobile/constant/color_constants.dart';
 import 'package:aral_mezunlar_mobile/view/calendar/calendar_view.dart';
 import 'package:aral_mezunlar_mobile/view/community/community_view.dart';
@@ -6,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import "package:persistent_bottom_nav_bar/persistent_tab_view.dart";
 import 'package:flutter/material.dart';
-
 import '../main_menu/main_menu_view.dart';
 import '../profile/profile_view.dart';
 

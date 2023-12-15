@@ -2,10 +2,8 @@ import 'package:aral_mezunlar_mobile/constant/color_constants.dart';
 import 'package:aral_mezunlar_mobile/extension/navigator_extension.dart';
 import 'package:aral_mezunlar_mobile/view/login/login_view.dart';
 import 'package:aral_mezunlar_mobile/view/register/register_view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/getwidget.dart';
 
 class ChooseAuthView extends StatefulWidget {
