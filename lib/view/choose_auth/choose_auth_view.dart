@@ -25,6 +25,7 @@ class _ChooseAuthViewState extends State<ChooseAuthView> {
         builder: (context, child) {
           return SafeArea(
             child: Scaffold(
+              resizeToAvoidBottomInset: false,
               body: Container(
                 decoration: const BoxDecoration(
                   image: DecorationImage(

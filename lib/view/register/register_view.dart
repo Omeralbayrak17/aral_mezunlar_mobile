@@ -370,6 +370,7 @@ class _RegisterViewState extends State<RegisterView> {
       builder: (context, child) {
         return SafeArea(
           child: Scaffold(
+              resizeToAvoidBottomInset: false,
               appBar: AppBar(
                 title: const Text(
                   "Kayıt Ol",

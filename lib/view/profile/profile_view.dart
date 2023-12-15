@@ -37,7 +37,8 @@ class _ProfileViewState extends State<ProfileView> {
           splitScreenMode: true,
         builder: (context, child){
           return Scaffold(
-              body: SingleChildScrollView(
+            resizeToAvoidBottomInset: false,
+            body: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(
                   children: [

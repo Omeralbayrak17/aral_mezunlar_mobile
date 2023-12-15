@@ -27,6 +27,7 @@ class _CalendarViewState extends State<CalendarView> {
       builder: (context, child) {
         return SafeArea(
           child: Scaffold(
+            resizeToAvoidBottomInset: false,
             body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               physics: const BouncingScrollPhysics(),

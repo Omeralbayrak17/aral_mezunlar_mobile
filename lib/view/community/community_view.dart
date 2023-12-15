@@ -46,6 +46,7 @@ class _CommunityViewState extends State<CommunityView> {
         splitScreenMode: true,
         builder: (context, child){
           return Scaffold(
+            resizeToAvoidBottomInset: false,
             body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(

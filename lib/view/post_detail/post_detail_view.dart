@@ -44,8 +44,8 @@ class _PostDetailViewState extends State<PostDetailView> {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-
           return Scaffold(
+            resizeToAvoidBottomInset: false,
             body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               physics: const BouncingScrollPhysics(),

@@ -194,6 +194,7 @@ class _LoginViewState extends State<LoginView> {
       builder: (context, child) {
         return SafeArea(
           child: Scaffold(
+              resizeToAvoidBottomInset: false,
               appBar: AppBar(
                 backgroundColor: ColorConstants.primaryButtonColor,
                 foregroundColor: Colors.white,

@@ -24,6 +24,7 @@ class _AralGalleryViewState extends State<AralGalleryView> {
       splitScreenMode: true,
       builder: (context, child) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           extendBody: true,
           body: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance.collection('aralgaleri').snapshots(),

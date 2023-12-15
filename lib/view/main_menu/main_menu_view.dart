@@ -55,6 +55,7 @@ class _MainMenuViewState extends State<MainMenuView> {
         builder: (context, child){
           return SafeArea(
             child: Scaffold(
+              resizeToAvoidBottomInset: false,
               body: GestureDetector(
               onTap: (){
               FocusScope.of(context).unfocus();

@@ -32,6 +32,7 @@ class _InspectProfileViewState extends State<InspectProfileView> {
         splitScreenMode: true,
         builder: (context, child){
           return Scaffold(
+            resizeToAvoidBottomInset: false,
             body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
