@@ -22,8 +22,8 @@ class _AddImageGalleryViewState extends State<AddImageGalleryView> {
   Future<void> _pickImage() async {
     pickedFile = await picker.pickImage(
       source: ImageSource.gallery,
-      maxHeight: 500,
-      maxWidth: 900,
+      maxHeight: 900,
+      maxWidth: 1600,
     );
 
     if (pickedFile != null) {

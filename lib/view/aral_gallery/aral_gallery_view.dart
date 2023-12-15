@@ -59,11 +59,9 @@ class _AralGalleryViewState extends State<AralGalleryView> {
                                 future: FirebaseStorageController.downloadImageFromStorage("aralgaleri", documentId),
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState == ConnectionState.done) {
-                                    String userProfilePhotoUrl = snapshot.data ?? '';
+                                    String aralGalleryImage = snapshot.data ?? '';
                                     return InkWell(
-                                      onTap: () {
-                                      },
-                                      onLongPress: () async {
+                                      onTap: () async {
                                         String userRole = await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).get().then((doc) {
                                           return doc['role'] as String;
                                         });
@@ -71,11 +69,14 @@ class _AralGalleryViewState extends State<AralGalleryView> {
                                           if(mounted) PopUpExtension.showGalleryImageDeleteConfirmationDialog(context, documentId);
                                         }
                                       },
+                                      onLongPress: () async {
+                                        PopUpExtension.showImageSaveConfirmationDialog(context, aralGalleryImage);
+                                      },
                                       splashColor: Colors.blue,
                                       hoverColor: Colors.purpleAccent,
                                       borderRadius: BorderRadius.circular(10),
                                       child: CachedNetworkImage(
-                                        imageUrl: userProfilePhotoUrl,
+                                        imageUrl: aralGalleryImage,
                                         placeholder: (context, url) => Shimmer.fromColors(
                                           baseColor: Colors.grey[300]!,
                                           highlightColor: Colors.grey[100]!,

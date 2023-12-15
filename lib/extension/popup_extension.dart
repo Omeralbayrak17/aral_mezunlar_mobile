@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../controller/firebase_storage_controller.dart';
 import 'flushbar_extension.dart';
+import 'image_gallery_saver_extension.dart';
 
 class PopUpExtension{
 
@@ -98,6 +99,42 @@ class PopUpExtension{
     );
   }
 
+  static void showImageSaveConfirmationDialog(BuildContext context, String imageUrl) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Fotoğrafı Kaydet'),
+          content: const Text('Bu fotoğrafı galeriye kaydetmek istiyor musunuz?'),
+          actions: [
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  ImageGallerySaverExtension.saveImageToGallery(context, imageUrl);
+
+                  Navigator.of(context).pop();
+
+                  FlushbarExtension.oneMessageFlushbar(context, "Fotoğraf galeriye kaydedildi");
+
+                } catch (e) {
+                  Navigator.of(context).pop();
+
+                  FlushbarExtension.oneMessageErrorFlushbar(context, "Fotoğraf galeriye kaydedilemedi");
+                }
+              },
+              child: const Text('Evet'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Hayır'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   static void showForgetPasswordDialog(BuildContext context) {
     TextEditingController emailController = TextEditingController();
