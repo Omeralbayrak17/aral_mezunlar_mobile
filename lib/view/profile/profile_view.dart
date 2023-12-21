@@ -1,5 +1,7 @@
 import 'package:aral_mezunlar_mobile/constant/color_constants.dart';
+import 'package:aral_mezunlar_mobile/constant/url_constants.dart';
 import 'package:aral_mezunlar_mobile/extension/navigator_extension.dart';
+import 'package:aral_mezunlar_mobile/extension/url_launcher_extension.dart';
 import 'package:aral_mezunlar_mobile/view/add_suggestion/add_suggestion_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:getwidget/components/button/gf_icon_button.dart';
 import 'package:getwidget/shape/gf_avatar_shape.dart';
@@ -45,7 +48,6 @@ class _ProfileViewState extends State<ProfileView> {
                     StreamBuilder(
                       stream: FirebaseFirestore.instance.collection('users').doc(uid).snapshots(),
                       builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot){
-
                         if(snapshot.connectionState == ConnectionState.waiting){
                           Shimmer.fromColors(
                             baseColor: Colors.grey[300]!,
@@ -348,10 +350,40 @@ class _ProfileViewState extends State<ProfileView> {
                                       },
                                       child: Row(
                                         children: [
-                                          const Icon(Icons.nights_stay_outlined, color: ColorConstants.primaryButtonColorAlternative),
+                                          const Expanded(
+                                            flex: 1,
+                                            child: Icon(Icons.nightlight_outlined, color: ColorConstants.primaryButtonColorAlternative),
+                                          ),
                                           SizedBox(width: 8.w,),
-                                          const Text("Uygulama Teması (Yakında)", style: TextStyle(color: ColorConstants.primaryButtonColorAlternative),),
-                                          const Spacer(),
+                                          const Expanded(
+                                            flex: 10,
+                                            child: Text("Uygulama Teması (Yakında)", style: TextStyle(color: ColorConstants.primaryButtonColorAlternative),),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    TextButton(
+                                      style: ButtonStyle(
+                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(0.0),
+                                          ),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        UrlLauncherExtension.launchWebView(UrlConstants().registerFormUrl);
+                                      },
+                                      child: Row(
+                                        children: [
+                                          const Expanded(
+                                            flex: 1,
+                                            child: FaIcon(FontAwesomeIcons.idCard, color: ColorConstants.primaryButtonColorAlternative),
+                                          ),
+                                          SizedBox(width: 8.w,),
+                                          const Expanded(
+                                            flex: 10,
+                                            child: Text("Dernek Kayıt Formu", style: TextStyle(color: ColorConstants.primaryButtonColorAlternative),),
+                                          )
                                         ],
                                       ),
                                     ),
@@ -373,9 +405,15 @@ class _ProfileViewState extends State<ProfileView> {
                                       },
                                       child: Row(
                                         children: [
-                                          const Icon(Icons.help_outline_outlined, color: ColorConstants.primaryButtonColorAlternative,),
+                                          const Expanded(
+                                            flex: 1,
+                                            child: Icon(Icons.question_mark, color: ColorConstants.primaryButtonColorAlternative),
+                                          ),
                                           SizedBox(width: 8.w,),
-                                          const Text("Bize Ulaşın", style: TextStyle(color: ColorConstants.primaryButtonColorAlternative)),
+                                          const Expanded(
+                                            flex: 10,
+                                            child: Text("Bize Ulaşın", style: TextStyle(color: ColorConstants.primaryButtonColorAlternative),),
+                                          )
                                         ],
                                       ),
                                     ),
@@ -392,9 +430,15 @@ class _ProfileViewState extends State<ProfileView> {
                                       },
                                       child: Row(
                                         children: [
-                                          const Icon(Icons.logout, color: ColorConstants.primaryButtonColorAlternative,),
+                                          const Expanded(
+                                            flex: 1,
+                                            child: Icon(Icons.logout, color: ColorConstants.primaryButtonColorAlternative),
+                                          ),
                                           SizedBox(width: 8.w,),
-                                          const Text("Çıkış Yap", style: TextStyle(color: ColorConstants.primaryButtonColorAlternative),),
+                                          const Expanded(
+                                            flex: 10,
+                                            child: Text("Çıkış Yap", style: TextStyle(color: ColorConstants.primaryButtonColorAlternative),),
+                                          )
                                         ],
                                       ),
                                     ),

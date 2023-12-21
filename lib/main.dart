@@ -20,8 +20,8 @@ void main() async {
   await FirebaseNotificationsApi().initNotifications();
   FirebaseNotificationsApi().requestPermissions();
   await FirebaseAppCheck.instance.activate(
-    webProvider: ReCaptchaV3Provider('894824180910'),
-    androidProvider: AndroidProvider.debug,
+    webProvider: ReCaptchaV3Provider('AIzaSyC3Hb0MnMN5PUQoKhJ-LeBklbspIsojZ0Y'),
+    androidProvider: AndroidProvider.playIntegrity,
   );
 
   runApp(const MyApp());

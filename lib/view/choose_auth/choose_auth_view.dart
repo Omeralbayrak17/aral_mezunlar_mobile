@@ -1,5 +1,6 @@
 import 'package:aral_mezunlar_mobile/constant/color_constants.dart';
 import 'package:aral_mezunlar_mobile/extension/navigator_extension.dart';
+import 'package:aral_mezunlar_mobile/view/armed_info/armed_info_view.dart';
 import 'package:aral_mezunlar_mobile/view/login/login_view.dart';
 import 'package:aral_mezunlar_mobile/view/register/register_view.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +77,14 @@ class _ChooseAuthViewState extends State<ChooseAuthView> {
                           child: Text("Kayıt Ol", style: Theme.of(context).textTheme.displayMedium),
                         ),
                       ),
-                      SizedBox(height: 80.h,),
+                      SizedBox(height: 10.h,),
+                      TextButton(
+                        onPressed: (){
+                          Navigator.push(context, NavigatorExtension.bottomToTopAnimation(const ArmedInfoView()));
+                        },
+                        child: const Text("ARMED nedir?"),
+                      ),
+                      SizedBox(height: 40.h,),
                     ],
                   ),
                 ),

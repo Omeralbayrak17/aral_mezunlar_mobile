@@ -15,4 +15,16 @@ class UrlLauncherExtension {
     }
 
   }
+
+  static Future<void> launchWebView(String url) async {
+
+    Uri uri = Uri.parse(url);
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $uri';
+    }
+  }
+
 }
