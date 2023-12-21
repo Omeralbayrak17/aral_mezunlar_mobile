@@ -2,7 +2,6 @@ import 'package:aral_mezunlar_mobile/api/firebase_api.dart';
 import 'package:aral_mezunlar_mobile/constant/color_constants.dart';
 import 'package:aral_mezunlar_mobile/view/bottom_navigation_bar/bottom_navigation_bar_view.dart';
 import 'package:aral_mezunlar_mobile/view/choose_auth/choose_auth_view.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,10 +18,6 @@ void main() async {
   await Firebase.initializeApp();
   await FirebaseNotificationsApi().initNotifications();
   FirebaseNotificationsApi().requestPermissions();
-  await FirebaseAppCheck.instance.activate(
-    webProvider: ReCaptchaV3Provider('AIzaSyC3Hb0MnMN5PUQoKhJ-LeBklbspIsojZ0Y'),
-    androidProvider: AndroidProvider.playIntegrity,
-  );
 
   runApp(const MyApp());
 }
