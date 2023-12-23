@@ -20,7 +20,7 @@ class NavigatorExtension {
           child: child,
         );
       },
-      reverseTransitionDuration: const Duration(milliseconds: 850),
+      reverseTransitionDuration: const Duration(milliseconds: 650),
       transitionDuration: const Duration(milliseconds: 500),
     );
   }
@@ -46,8 +46,8 @@ class NavigatorExtension {
           ),
         );
       },
-      reverseTransitionDuration: const Duration(milliseconds: 600),
-      transitionDuration: const Duration(milliseconds: 600),
+      reverseTransitionDuration: const Duration(milliseconds: 500),
+      transitionDuration: const Duration(milliseconds: 500),
     );
   }
 
@@ -69,8 +69,8 @@ class NavigatorExtension {
           child: child,
         );
       },
-      reverseTransitionDuration: const Duration(milliseconds: 600),
-      transitionDuration: const Duration(milliseconds: 600),
+      reverseTransitionDuration: const Duration(milliseconds: 500),
+      transitionDuration: const Duration(milliseconds: 500),
     );
   }
 
@@ -95,8 +95,8 @@ class NavigatorExtension {
           ),
         );
       },
-      reverseTransitionDuration: const Duration(milliseconds: 600),
-      transitionDuration: const Duration(milliseconds: 600),
+      reverseTransitionDuration: const Duration(milliseconds: 500),
+      transitionDuration: const Duration(milliseconds: 500),
     );
   }
 
