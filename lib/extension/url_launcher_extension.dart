@@ -20,10 +20,12 @@ class UrlLauncherExtension {
 
     Uri uri = Uri.parse(url);
 
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    } else {
-      throw 'Could not launch $uri';
+    try {
+      await launchUrl(
+        uri,
+      );
+    } catch (e) {
+      return;
     }
   }
 
