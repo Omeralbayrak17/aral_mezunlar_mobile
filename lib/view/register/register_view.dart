@@ -1,9 +1,12 @@
+import 'package:aral_mezunlar_mobile/view/privacy_policy/privacy_policy_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constant/color_constants.dart';
+import '../../extension/navigator_extension.dart';
+import '../terms_of_use/terms_of_use_view.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -26,6 +29,9 @@ class _RegisterViewState extends State<RegisterView> {
   bool _isSecure = true;
   bool _isConfirmSecure = true;
   String? errorMessage = " ";
+  bool _isChecked = false;
+  bool _isCheckedTOS = false;
+
 
   final formKey = GlobalKey<FormState>();
 
@@ -270,80 +276,124 @@ class _RegisterViewState extends State<RegisterView> {
             ? const Icon(Icons.visibility)
             : const Icon(Icons.visibility_off));
   }
+  
+  Widget _checkPrivacyPolicy(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Checkbox(
+              value: _isChecked,
+              onChanged: (bool? value) {
+                setState(() {
+                  _isChecked = value!;
+                });
+              },
+            ),
+            Expanded(child: TextButton(onPressed: (){Navigator.push(context, NavigatorExtension.expandFromEdgeAnimation(const PrivacyPolicyView(), Alignment.bottomRight));}, child: Text('Gizlilik politikasını okudum ve kabul ediyorum.', style: Theme.of(context).textTheme.titleSmall,))),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _checkTermsOfUse(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Checkbox(
+              value: _isCheckedTOS,
+              onChanged: (bool? value) {
+                setState(() {
+                  _isCheckedTOS = value!;
+                });
+              },
+            ),
+            Expanded(child: TextButton(onPressed: (){Navigator.push(context, NavigatorExtension.expandFromEdgeAnimation(const TermsOfUseView(), Alignment.bottomRight));}, child: Text('Kullanım koşullarını okudum ve kabul ediyorum.', style: Theme.of(context).textTheme.titleSmall,))),
+          ],
+        ),
+      ],
+    );
+  }
 
 
   Widget _submitButton() {
     return Row(
       children: [
         Expanded(
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorConstants.primaryButtonColor,
-                    shape: ContinuousRectangleBorder(
-                        borderRadius: BorderRadius.circular(15))),
-                onPressed: () async {
-                  if (_controllerPassword.text ==
-                      _controllerConfirmPassword.text) {
-                    if (formKey.currentState!.validate()) {
-                      try {
-                        UserCredential authResult = await FirebaseAuth.instance
-                            .createUserWithEmailAndPassword(
-                                email: _controllerEmail.text,
-                                password: _controllerPassword.text);
-                        String uid = authResult.user!.uid;
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorConstants.primaryButtonColor,
+              shape: ContinuousRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+            ),
+            onPressed: () async {
+              if ((_isChecked && _isCheckedTOS)) {
+                if (_controllerPassword.text == _controllerConfirmPassword.text) {
+                  if (formKey.currentState!.validate()) {
+                    try {
+                      UserCredential authResult = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                        email: _controllerEmail.text,
+                        password: _controllerPassword.text,
+                      );
+                      String uid = authResult.user!.uid;
 
-                        if (mounted) {
-                          await FirebaseFirestore.instance
-                              .collection('users')
-                              .doc(uid)
-                              .set({
-                            'name': _controllerName.text,
-                            'surname': _controllerSurname.text,
-                            'email': _controllerEmail.text,
-                            'about': _controllerAbout.text,
-                            'role': "Uye",
-                            'imageurl': " ",
-                            'bannerurl': "",
-                            'uid': uid,
-                            'likes': [],
-                            'createdAt': FieldValue.serverTimestamp(),
-                          }).then((value) {
-                            // İşlem tamamlandığında loading ekranını kapat
-                            Navigator.pop(context);
-                            // Ana menü sayfasına yönlendir
-                          });
-                        }
-                      } on FirebaseAuthException catch (e) {
-                        if (e.code == 'weak-password') {
-                          setState(() {
-                            errorMessage =
-                                "Şifreniz en az 6 karakterden oluşmalıdır..";
-                          });
-                        } else if (e.code == 'email-already-in-use') {
-                          setState(() {
-                            errorMessage = "Girilen e-mail kullanılmaktadır.";
-                          });
-                        } else {
-                          setState(() {
-                            errorMessage =
-                                "Bir problem oluştu. Lütfen uygulamayı kapatıp tekrar deneyin.";
-                          });
-                        }
+                      if (mounted) {
+                        await FirebaseFirestore.instance.collection('users').doc(uid).set({
+                          'name': _controllerName.text,
+                          'surname': _controllerSurname.text,
+                          'email': _controllerEmail.text,
+                          'about': _controllerAbout.text,
+                          'role': "Uye",
+                          'imageurl': " ",
+                          'bannerurl': "",
+                          'uid': uid,
+                          'likes': [],
+                          'createdAt': FieldValue.serverTimestamp(),
+                        }).then((value) {
+                          Navigator.pop(context);
+                        });
+                      }
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'weak-password') {
+                        setState(() {
+                          errorMessage = "Şifreniz en az 6 karakterden oluşmalıdır..";
+                        });
+                      } else if (e.code == 'email-already-in-use') {
+                        setState(() {
+                          errorMessage = "Girilen e-mail kullanılmaktadır.";
+                        });
+                      } else {
+                        setState(() {
+                          errorMessage = "Bir problem oluştu. Lütfen uygulamayı kapatıp tekrar deneyin.";
+                        });
                       }
                     }
-                  } else {
-                    setState(() {
-                      errorMessage = "Şifreleriniz uyuşmamaktadır.";
-                    });
                   }
-                },
-                child: Padding(
-                  padding: EdgeInsets.all(14.w),
-                  child: const Text(
-                    "Kayıt Ol",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ))),
+                } else {
+                  setState(() {
+                    errorMessage = "Şifreleriniz uyuşmamaktadır.";
+                  });
+                }
+              } else {
+                setState(() {
+                  errorMessage = "Lütfen gizlilik politikasını ve kullanım koşullarını kabul edin.";
+                });
+              }
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(14),
+              child: Text(
+                "Kayıt Ol",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -383,7 +433,7 @@ class _RegisterViewState extends State<RegisterView> {
               body: SizedBox(
                 height: ScreenUtil().screenHeight,
                 child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   child: Padding(
                     padding:
@@ -417,7 +467,15 @@ class _RegisterViewState extends State<RegisterView> {
                           _aboutEntryField(
                               "Hakkınızda bir açıklama girin", _controllerAbout),
                           SizedBox(
-                            height: 25.h,
+                            height: 5.h,
+                          ),
+                          _checkPrivacyPolicy(),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          _checkTermsOfUse(),
+                          SizedBox(
+                            height: 5.h,
                           ),
                           _submitButton(),
                           Text(errorMessage!,style: TextStyle(color: Colors.black, fontSize: 18.sp),),
